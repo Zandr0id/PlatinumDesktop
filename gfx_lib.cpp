@@ -21,7 +21,16 @@ void gfx::draw_circle(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned
     int x = 0;
     int y = r;
     int d = 3 - 2 * r;
-    plot_circle(bitmap, x0, y0, x, y);
+
+    bitmap.set_pixel(gfx::draw_color, x0 + x, y0 + y);
+    bitmap.set_pixel(gfx::draw_color, x0 - x, y0 + y);
+    bitmap.set_pixel(gfx::draw_color, x0 + x, y0 - y);
+    bitmap.set_pixel(gfx::draw_color, x0 - x, y0 - y);
+    bitmap.set_pixel(gfx::draw_color, x0 + y, y0 + x);
+    bitmap.set_pixel(gfx::draw_color, x0 - y, y0 + x);
+    bitmap.set_pixel(gfx::draw_color, x0 + y, y0 - x);
+    bitmap.set_pixel(gfx::draw_color, x0 - y, y0 - x);
+
     while (y >= x)
     {
         // for each pixel we will
@@ -38,8 +47,69 @@ void gfx::draw_circle(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned
             d = d + 4 * (x - y) + 10;
         }
         else
+        {
             d = d + 4 * x + 6;
-        plot_circle(bitmap, x0, y0, x, y);
+        }
+
+        bitmap.set_pixel(gfx::draw_color, x0 + x, y0 + y);
+        bitmap.set_pixel(gfx::draw_color, x0 - x, y0 + y);
+        bitmap.set_pixel(gfx::draw_color, x0 + x, y0 - y);
+        bitmap.set_pixel(gfx::draw_color, x0 - x, y0 - y);
+        bitmap.set_pixel(gfx::draw_color, x0 + y, y0 + x);
+        bitmap.set_pixel(gfx::draw_color, x0 - y, y0 + x);
+        bitmap.set_pixel(gfx::draw_color, x0 + y, y0 - x);
+        bitmap.set_pixel(gfx::draw_color, x0 - y, y0 - x);
+    }
+}
+
+void gfx::fill_circle(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned int r)
+{
+    int x = 0;
+    int y = r;
+    int d = 3 - 2 * r;
+    draw_line(bitmap, x0 + y, y0 + x, x0, y0 + x);
+    draw_line(bitmap, x0 - y, y0 + x, x0, y0 + x);
+    draw_line(bitmap, x0 + y, y0 - x, x0, y0 - x);
+    draw_line(bitmap, x0 - y, y0 - x, x0, y0 - x);
+    draw_line(bitmap, x0 + x, y0 + y, x0, y0 + y);
+    draw_line(bitmap, x0 - x, y0 + y, x0, y0 + y);
+    draw_line(bitmap, x0 + x, y0 - y, x0, y0 - y);
+    draw_line(bitmap, x0 - x, y0 - y, x0, y0 - y);
+
+    // bitmap.set_pixel(gfx::draw_color, x0 - x, y0 + y);
+    // bitmap.set_pixel(gfx::draw_color, x0 + x, y0 - y);
+    // bitmap.set_pixel(gfx::draw_color, x0 - x, y0 - y);
+    // bitmap.set_pixel(gfx::draw_color, x0 + y, y0 + x);
+    // bitmap.set_pixel(gfx::draw_color, x0 - y, y0 + x);
+    // bitmap.set_pixel(gfx::draw_color, x0 + y, y0 - x);
+    // bitmap.set_pixel(gfx::draw_color, x0 - y, y0 - x);
+    while (y >= x)
+    {
+        // for each pixel we will
+        // draw all eight pixels
+
+        x++;
+
+        // check for decision parameter
+        // and correspondingly
+        // update d, x, y
+        if (d > 0)
+        {
+            y--;
+            d = d + 4 * (x - y) + 10;
+        }
+        else
+        {
+            d = d + 4 * x + 6;
+        }
+        draw_line(bitmap, x0 + y, y0 + x, x0, y0 + x);
+        draw_line(bitmap, x0 - y, y0 + x, x0, y0 + x);
+        draw_line(bitmap, x0 + y, y0 - x, x0, y0 - x);
+        draw_line(bitmap, x0 - y, y0 - x, x0, y0 - x);
+        draw_line(bitmap, x0 + x, y0 + y, x0, y0 + y);
+        draw_line(bitmap, x0 - x, y0 + y, x0, y0 + y);
+        draw_line(bitmap, x0 + x, y0 - y, x0, y0 - y);
+        draw_line(bitmap, x0 - x, y0 - y, x0, y0 - y);
     }
 }
 

@@ -17,35 +17,36 @@ int main()
     //bitmap.set_pixel(p2, 20, 20);
     //bitmap.set_pixel(p3, 30, 30);
 
-    gfx::draw_color.set(255, 0, 0, 0);
-    gfx::draw_line(bitmap, 400, 400, 400, 200);
-    gfx::draw_line(bitmap, 400, 400, 200, 400);
-    gfx::draw_line(bitmap, 400, 400, 400, 600);
-    gfx::draw_line(bitmap, 400, 400, 600, 400);
+    // gfx::draw_color.set(255, 0, 0, 0);
+    // gfx::draw_line(bitmap, 400, 400, 400, 200);
+    // gfx::draw_line(bitmap, 400, 400, 200, 400);
+    // gfx::draw_line(bitmap, 400, 400, 400, 600);
+    // gfx::draw_line(bitmap, 400, 400, 600, 400);
 
+    gfx::draw_color.set(0, 255, 200, 0);
+    gfx::fill_circle(bitmap, 500, 400, 200);
+    gfx::draw_color.set(255, 0, 200, 0);
     gfx::draw_circle(bitmap, 400, 400, 200);
     gfx::draw_color.set(0, 255, 0, 0);
     gfx::draw_circle(bitmap, 300, 300, 100);
-    gfx::draw_color.set(0, 255, 200, 0);
-    gfx::draw_circle(bitmap, 500, 400, 200);
 
-    gfx::draw_color.set(255, 255, 0, 0);
-    gfx::draw_line(bitmap, 400, 400, 600, 600);
-    gfx::draw_line(bitmap, 400, 400, 200, 200);
-    gfx::draw_line(bitmap, 400, 400, 600, 200);
-    gfx::draw_line(bitmap, 400, 400, 200, 600);
+    // gfx::draw_color.set(255, 255, 0, 0);
+    // gfx::draw_line(bitmap, 400, 400, 600, 600);
+    // gfx::draw_line(bitmap, 400, 400, 200, 200);
+    // gfx::draw_line(bitmap, 400, 400, 600, 200);
+    // gfx::draw_line(bitmap, 400, 400, 200, 600);
 
-    gfx::draw_color.set(0, 0, 255, 0);
-    gfx::draw_line(bitmap, 400, 400, 200, 300);
-    gfx::draw_line(bitmap, 400, 400, 600, 300);
-    gfx::draw_line(bitmap, 400, 400, 200, 500);
-    gfx::draw_line(bitmap, 400, 400, 600, 500);
+    // gfx::draw_color.set(0, 0, 255, 0);
+    // gfx::draw_line(bitmap, 400, 400, 200, 300);
+    // gfx::draw_line(bitmap, 400, 400, 600, 300);
+    // gfx::draw_line(bitmap, 400, 400, 200, 500);
+    // gfx::draw_line(bitmap, 400, 400, 600, 500);
 
-    gfx::draw_color.set(0, 255, 255, 0);
-    gfx::draw_line(bitmap, 400, 400, 300, 200);
-    gfx::draw_line(bitmap, 400, 400, 300, 600);
-    gfx::draw_line(bitmap, 400, 400, 500, 600);
-    gfx::draw_line(bitmap, 400, 400, 500, 200);
+    // gfx::draw_color.set(0, 255, 255, 0);
+    // gfx::draw_line(bitmap, 400, 400, 300, 200);
+    // gfx::draw_line(bitmap, 400, 400, 300, 600);
+    // gfx::draw_line(bitmap, 400, 400, 500, 600);
+    // gfx::draw_line(bitmap, 400, 400, 500, 200);
     sdl.update_screen();
     sdl.wait_for_close();
 
