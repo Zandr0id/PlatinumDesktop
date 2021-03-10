@@ -1,0 +1,19 @@
+build/SDL_dummysensor.lo: \
+ /home/zane/Projects/GraphicsTest/SDL/src/sensor/dummy/SDL_dummysensor.c \
+ /home/zane/Projects/GraphicsTest/SDL/src/sensor/dummy/../../SDL_internal.h \
+ /home/zane/Projects/GraphicsTest/SDL/src/sensor/dummy/../../dynapi/SDL_dynapi.h \
+ /home/zane/Projects/GraphicsTest/SDL/src/sensor/dummy/../../dynapi/SDL_dynapi_overrides.h \
+ include/SDL_config.h \
+ /home/zane/Projects/GraphicsTest/SDL/include/SDL_platform.h \
+ /home/zane/Projects/GraphicsTest/SDL/include/begin_code.h \
+ /home/zane/Projects/GraphicsTest/SDL/include/close_code.h \
+ /home/zane/Projects/GraphicsTest/SDL/include/SDL_assert.h \
+ /home/zane/Projects/GraphicsTest/SDL/include/SDL_config.h \
+ /home/zane/Projects/GraphicsTest/SDL/include/SDL_log.h \
+ /home/zane/Projects/GraphicsTest/SDL/include/SDL_stdinc.h \
+ /home/zane/Projects/GraphicsTest/SDL/include/SDL_error.h \
+ /home/zane/Projects/GraphicsTest/SDL/include/SDL_sensor.h \
+ /home/zane/Projects/GraphicsTest/SDL/include/SDL_error.h \
+ /home/zane/Projects/GraphicsTest/SDL/src/sensor/dummy/SDL_dummysensor.h \
+ /home/zane/Projects/GraphicsTest/SDL/src/sensor/dummy/../SDL_syssensor.h \
+ /home/zane/Projects/GraphicsTest/SDL/src/sensor/dummy/../SDL_sensor_c.h
