@@ -3,19 +3,6 @@
 #include <iostream>
 
 ///circle drawing
-void plot_circle(Bitmap &bitmap, int xc, int yc, int x, int y)
-{
-
-    bitmap.set_pixel(gfx::draw_color, xc + x, yc + y);
-    bitmap.set_pixel(gfx::draw_color, xc - x, yc + y);
-    bitmap.set_pixel(gfx::draw_color, xc + x, yc - y);
-    bitmap.set_pixel(gfx::draw_color, xc - x, yc - y);
-    bitmap.set_pixel(gfx::draw_color, xc + y, yc + x);
-    bitmap.set_pixel(gfx::draw_color, xc - y, yc + x);
-    bitmap.set_pixel(gfx::draw_color, xc + y, yc - x);
-    bitmap.set_pixel(gfx::draw_color, xc - y, yc - x);
-}
-
 void gfx::draw_circle(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned int r)
 {
     int x = 0;
@@ -185,7 +172,6 @@ void gfx::draw_line(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned i
             dy = y1 - y0;
         }
 
-        std::cout << x0 << " " << y0 << " " << x1 << " " << y1 << std::endl;
         int y_step = 1;
         if (dy < 0)
         {
