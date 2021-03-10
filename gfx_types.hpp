@@ -133,4 +133,10 @@ private:
     int m_height;
 };
 
+struct Point
+{
+    unsigned int x;
+    unsigned int y;
+}
+
 #endif //GFX_TYPES_HPP
