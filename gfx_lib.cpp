@@ -245,3 +245,19 @@ void gfx::draw_line(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned i
         }
     }
 }
+
+void gfx::draw_rect(Bitmap &bitmap, unsigned int x, unsigned int y, unsigned int h, unsigned int w)
+{
+    draw_line(bitmap, x, y, x + w, y);
+    draw_line(bitmap, x, y, x, y + h);
+    draw_line(bitmap, x + w, y, x + w, y + h);
+    draw_line(bitmap, x, y + h, x + w, y + h);
+}
+
+void gfx::fill_rect(Bitmap &bitmap, unsigned int x, unsigned int y, unsigned int h, unsigned int w)
+{
+    for (int i = x; i < (x + w); i++)
+    {
+        draw_line(bitmap, i, y, i, y + h);
+    }
+}

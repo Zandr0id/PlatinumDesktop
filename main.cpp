@@ -24,11 +24,12 @@ int main()
     // gfx::draw_line(bitmap, 400, 400, 600, 400);
 
     gfx::draw_color.set(0, 255, 200, 0);
-    gfx::fill_circle(bitmap, 500, 400, 200);
-    gfx::draw_color.set(255, 0, 200, 0);
-    gfx::draw_circle(bitmap, 400, 400, 200);
-    gfx::draw_color.set(0, 255, 0, 0);
-    gfx::draw_circle(bitmap, 300, 300, 100);
+    // gfx::fill_circle(bitmap, 500, 400, 200);
+    // gfx::draw_color.set(255, 0, 200, 0);
+    // gfx::draw_circle(bitmap, 400, 400, 200);
+    // gfx::draw_color.set(0, 255, 0, 0);
+    // gfx::draw_circle(bitmap, 300, 300, 100);
+    gfx::fill_rect(bitmap, 10, 10, 50, 100);
 
     // gfx::draw_color.set(255, 255, 0, 0);
     // gfx::draw_line(bitmap, 400, 400, 600, 600);
