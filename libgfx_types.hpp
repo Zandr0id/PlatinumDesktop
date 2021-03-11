@@ -111,12 +111,20 @@ namespace gfx
 
         void set_pixel(Pixel p, unsigned int x, unsigned int y)
         {
+            Pixel background = pixel_at(x, y);
+
+            uint8_t new_r = (p.alpha() * (background.red() - p.red()) + background.red());
+            uint8_t new_g = (p.alpha() * (background.green() - p.green()) + background.green());
+            uint8_t new_b = (p.alpha() * (background.blue() - p.blue()) + background.blue());
+            p.set(new_r, new_g, new_b, p.alpha());
+
             m_data[(m_width * y) + x] = p;
         }
 
         void set_pixel(uint8_t r, uint8_t g, uint8_t b, uint8_t a, unsigned int x, unsigned int y)
         {
             Pixel tmp(r, g, b, a);
+            set_pixel(tmp.red(), tmp.green(), tmp.blue(), tmp.alpha(), x, y);
             m_data[(m_width * y) + x] = tmp;
         }
 
