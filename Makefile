@@ -1,4 +1,4 @@
-OUTPUT_FILE = graphics_test
+OUTPUT_FILE = desktop
 
 SRC_FILES = $(wildcard *.cpp)
 

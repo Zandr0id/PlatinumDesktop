@@ -1,4 +1,4 @@
-#include "gfx_lib.hpp"
+#include "libgfx.hpp"
 #include "SDL_interface.hpp"
 
 const int SCREEN_WIDTH = 800;
@@ -6,16 +6,8 @@ const int SCREEN_HEIGHT = 800;
 
 int main()
 {
-
-    Bitmap bitmap(SCREEN_WIDTH, SCREEN_HEIGHT);
+    gfx::Bitmap bitmap(SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_Interface sdl(SCREEN_WIDTH, SCREEN_HEIGHT, bitmap);
-    //Pixel p(255, 0, 0, 255);
-    //Pixel p2(0, 255, 0, 255);
-    //Pixel p3(0, 0, 255, 255);
-
-    //bitmap.set_pixel(p, 10, 10);
-    //bitmap.set_pixel(p2, 20, 20);
-    //bitmap.set_pixel(p3, 30, 30);
 
     gfx::draw_color.set(255, 0, 0, 0);
     gfx::draw_line(bitmap, 400, 400, 400, 200);

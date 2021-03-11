@@ -8,18 +8,18 @@ Date: 03/08/2021
 */
 
 #include <SDL2/SDL.h>
-#include "gfx_types.hpp"
+#include "libgfx_types.hpp"
 
 class SDL_Interface
 {
 public:
-    SDL_Interface(int width, int height, Bitmap &bitmap);
+    SDL_Interface(int width, int height, gfx::Bitmap &bitmap);
     ~SDL_Interface();
     void update_screen();
     void wait_for_close();
 
 private:
-    Bitmap *map; //this is the bitmap that it will read from
+    gfx::Bitmap *map; //this is the bitmap that it will read from
     int m_width;
     int m_height;
     // SDL render stuff
@@ -28,7 +28,7 @@ private:
     SDL_Window *window;
 };
 
-SDL_Interface::SDL_Interface(int width, int height, Bitmap &bitmap)
+SDL_Interface::SDL_Interface(int width, int height, gfx::Bitmap &bitmap)
 {
     map = &bitmap;
     m_width = width;
@@ -52,7 +52,7 @@ void SDL_Interface::update_screen()
     {
         for (int w = 0; w < m_width; ++w)
         {
-            Pixel tmp(map->pixel_at(w, h));
+            gfx::Pixel tmp(map->pixel_at(w, h));
             //Alpha will already have been delt with by this point
             //Only care about the RGB
             SDL_SetRenderDrawColor(renderer, tmp.red(), tmp.green(), tmp.blue(), 255);
