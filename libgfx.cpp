@@ -35,7 +35,6 @@ void gfx::draw_ellipse(Bitmap &bitmap, unsigned int x, unsigned int y, unsigned 
     for (int i = 0; i < ellipse.parimeter.size(); i++)
     {
         //draw_color.set(0, ((float)i / float(ellipse.parimeter.size())) * 255, 0, 255);
-        std::cout << ellipse.parimeter.size() << std::endl;
         int x = ellipse.parimeter[i].x;
         int y = ellipse.parimeter[i].y;
         bitmap.set_pixel(gfx::draw_color, x, y);
