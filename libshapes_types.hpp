@@ -23,6 +23,17 @@ namespace shapes
             x = x0;
             y = y0;
         }
+        bool operator==(const Point &b)
+        {
+            if ((x == b.x) && (y == b.y))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     };
 
     struct Line
@@ -85,6 +96,23 @@ namespace shapes
             Line c;
             Line d;
         } sides;
+    };
+
+    struct Arc
+    {
+        std::vector<Point> parimeter;
+        Point center;
+        unsigned int radius;
+        unsigned short theta_1;
+        unsigned short theta_2;
+    };
+
+    struct Ellipse
+    {
+        std::vector<Point> parimeter;
+        Point center;
+        unsigned int r_w;
+        unsigned int r_h;
     };
 
     struct Polygon

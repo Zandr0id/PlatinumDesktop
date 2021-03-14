@@ -1,6 +1,7 @@
 #include "libshapes.hpp"
 #include <algorithm>
 #include <math.h>
+#include <iostream>
 
 //Complex line calculator for different types of lines
 //retursn a line object with a vector containing all points on the line
@@ -265,6 +266,173 @@ shapes::Rect shapes::calculate_rect(unsigned int x, unsigned int y, unsigned int
     tmp = calculate_line(x + w, y, x, y);
     ret.sides.d = tmp;
     ret.parimeter.insert(ret.parimeter.end(), tmp.points.begin(), tmp.points.end());
+
+    return ret;
+}
+
+shapes::Arc shapes::calculate_arc(unsigned int x, unsigned int y, unsigned int r, unsigned short theta_1, unsigned short theta_2)
+{
+    Arc ret;
+    ret.center.x = x;
+    ret.center.y = y;
+    ret.radius = r;
+    ret.theta_1 = theta_1;
+    ret.theta_2 = theta_2;
+
+    Circle base = calculate_circle(x, y, r);
+    std::cout << x << " " << y << " " << r << std::endl;
+
+    //standard trig functions assume 0 deg is down, but we want up, wo
+    theta_1 += 180;
+    theta_2 += 180;
+
+    r += 5; //make sure the line crosses the circle
+
+    double angle = (theta_1) * (PI / 180.0); //convert to rad
+    int opp = sin(angle) * r;                //find the two end points and normalize
+    int adj = cos((angle)) * r;
+    Line start_angle = calculate_line(x, y, opp + x, adj + y); //find the line
+    Point start(x + opp, y + adj);
+
+    int start_index = 0;
+    for (int i = 0; i < base.parimeter.size() / 3; i++)
+    {
+        for (int j = 0; j < start_angle.points.size(); j++)
+        {
+            std::cout << "< " << base.parimeter[i].x << "," << base.parimeter[i].y << ">  ---  < " << start_angle.points[j].x << "," << start_angle.points[j].y << ">\n";
+            if (base.parimeter[i] == start_angle.points[j])
+            {
+                start_index = i;
+                break;
+            }
+        }
+    }
+    std::cout << start_index << std::endl;
+
+    angle = (theta_2) * (PI / 180.0);
+    opp = sin(angle) * r;
+    adj = cos(angle) * r;
+    Line end_angle = calculate_line(x, y, opp + x, adj + y);
+    Point end(x + opp, y + adj);
+
+    ret.parimeter.insert(ret.parimeter.end(), base.parimeter.begin(), base.parimeter.end());
+    ret.parimeter.insert(ret.parimeter.end(), start_angle.points.begin(), start_angle.points.end());
+    ret.parimeter.insert(ret.parimeter.end(), end_angle.points.begin(), end_angle.points.end());
+    // bool in_range = false;
+    // for (int i = 0; i < base.parimeter.size(); i++)
+    // {
+    //     if (base.parimeter[i] == start)
+    //     {
+    //         std::cout << "true ";
+    //         in_range = true;
+    //     }
+    //     if (true == in_range)
+    //     {
+    //         //std::cout << "true ";
+    //         ret.parimeter.push_back(base.parimeter[i]);
+    //     }
+    // }
+    std::cout << base.parimeter.size() << std::endl;
+    return ret;
+}
+
+shapes::Ellipse shapes::calculate_ellipse(unsigned int x, unsigned int y, unsigned int r_w, unsigned int r_h)
+{
+    Ellipse ret;
+    ret.center.x = x;
+    ret.center.y = y;
+    ret.r_h = r_h;
+    ret.r_w = r_w;
+
+    std::vector<Point> q1;
+    std::vector<Point> q2;
+    std::vector<Point> q3;
+    std::vector<Point> q4;
+    std::vector<Point> q5;
+    std::vector<Point> q6;
+    std::vector<Point> q7;
+    std::vector<Point> q8;
+
+    int error = 0;
+    const int twoAsquare = (2 * r_w * r_w);
+    const int twoBsquare = (2 * r_h * r_h);
+    int dx = (r_h * r_h * (1 - (2 * r_w)));
+    int dy = (r_w * r_w);
+    int stop_x = twoBsquare * r_w;
+    int stop_y = 0;
+    int x0 = r_w;
+    int y0 = 0;
+
+    while (stop_x >= stop_y)
+    {
+        //push back 4 quads
+        Point tmp(x + x0, y + y0);
+        q1.push_back(tmp);
+        tmp.set(x - x0, y + y0);
+        q3.push_back(tmp);
+        tmp.set(x - x0, y - y0);
+        q5.push_back(tmp);
+        tmp.set(x + x0, y - y0);
+        q7.push_back(tmp);
+
+        y0++;
+        stop_y += twoAsquare;
+        error += dy;
+        dy += twoAsquare;
+        if ((2 * error) + dx > 0)
+        {
+            x0--;
+            stop_x -= twoBsquare;
+            error += dx;
+            dx += twoBsquare;
+        }
+    }
+
+    x0 = 0;
+    y0 = r_h;
+    dx = r_h * r_h;
+    dy = r_w * r_w * (1 - (2 * r_h));
+    error = 0;
+    stop_x = 0;
+    stop_y = twoAsquare * r_h;
+    while (stop_x <= stop_y)
+    {
+        //push back 4 quads
+        Point tmp(x + x0, y + y0);
+        q2.push_back(tmp);
+        tmp.set(x - x0, y + y0);
+        q4.push_back(tmp);
+        tmp.set(x - x0, y - y0);
+        q6.push_back(tmp);
+        tmp.set(x + x0, y - y0);
+        q8.push_back(tmp);
+
+        x0++;
+        stop_x += twoBsquare;
+        error += dx;
+        dx += twoBsquare;
+        if ((2 * error) + dx > 0)
+        {
+            y0--;
+            stop_y -= twoAsquare;
+            error += dy;
+            dy += twoAsquare;
+        }
+    }
+
+    std::reverse(q1.begin(), q1.end());
+    std::reverse(q4.begin(), q4.end());
+    std::reverse(q5.begin(), q5.end());
+    std::reverse(q8.begin(), q8.end());
+
+    ret.parimeter.insert(ret.parimeter.end(), q6.begin(), q6.end()); //up up left
+    ret.parimeter.insert(ret.parimeter.end(), q5.begin(), q5.end()); //mid up left
+    ret.parimeter.insert(ret.parimeter.end(), q3.begin(), q3.end()); //mid low left
+    ret.parimeter.insert(ret.parimeter.end(), q4.begin(), q4.end()); //low low left
+    ret.parimeter.insert(ret.parimeter.end(), q2.begin(), q2.end()); //low low right
+    ret.parimeter.insert(ret.parimeter.end(), q1.begin(), q1.end()); //mid low right
+    ret.parimeter.insert(ret.parimeter.end(), q7.begin(), q7.end()); // mid up right
+    ret.parimeter.insert(ret.parimeter.end(), q8.begin(), q8.end()); //up up right
 
     return ret;
 }
