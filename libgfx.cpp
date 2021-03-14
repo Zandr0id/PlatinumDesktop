@@ -28,6 +28,32 @@ void gfx::fill_circle(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned
     }
 }
 
+//Ellipses
+void gfx::draw_ellipse(Bitmap &bitmap, unsigned int x, unsigned int y, unsigned int r_w, unsigned int r_h)
+{
+    shapes::Ellipse ellipse = shapes::calculate_ellipse(x, y, r_w, r_h);
+    for (int i = 0; i < ellipse.parimeter.size(); i++)
+    {
+        //draw_color.set(0, ((float)i / float(ellipse.parimeter.size())) * 255, 0, 255);
+        std::cout << ellipse.parimeter.size() << std::endl;
+        int x = ellipse.parimeter[i].x;
+        int y = ellipse.parimeter[i].y;
+        bitmap.set_pixel(gfx::draw_color, x, y);
+    }
+}
+
+//Arcs
+void gfx::draw_arc(Bitmap &bitmap, unsigned int x, unsigned int y, unsigned int r, unsigned short theta_1, unsigned short theta_2)
+{
+    shapes::Arc arc = shapes::calculate_arc(x, y, r, theta_1, theta_2);
+    for (int i = 0; i < arc.parimeter.size(); i++)
+    {
+        int x = arc.parimeter[i].x;
+        int y = arc.parimeter[i].y;
+        bitmap.set_pixel(gfx::draw_color, x, y);
+    }
+}
+
 //Lines
 void gfx::draw_line(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1)
 {
