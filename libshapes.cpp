@@ -248,7 +248,7 @@ shapes::Rect shapes::calculate_rect(unsigned int x, unsigned int y, unsigned int
     shapes::Rect ret;
     shapes::Line tmp;
 
-    //set the corners in a counter clock-wise fasion, starting with top left
+    //set the corners in a ccw fasion, starting with top left
     ret.corners.a.set(x, y);
     ret.corners.b.set(x, y + h);
     ret.corners.c.set(x + w, y + h);
@@ -270,6 +270,7 @@ shapes::Rect shapes::calculate_rect(unsigned int x, unsigned int y, unsigned int
     return ret;
 }
 
+//TODO: finish
 shapes::Arc shapes::calculate_arc(unsigned int x, unsigned int y, unsigned int r, unsigned short theta_1, unsigned short theta_2)
 {
     Arc ret;
@@ -419,7 +420,7 @@ shapes::Ellipse shapes::calculate_ellipse(unsigned int x, unsigned int y, unsign
             dy += twoAsquare;
         }
     }
-
+    //these were calculated cw, so flip to ccw
     std::reverse(q1.begin(), q1.end());
     std::reverse(q4.begin(), q4.end());
     std::reverse(q5.begin(), q5.end());
