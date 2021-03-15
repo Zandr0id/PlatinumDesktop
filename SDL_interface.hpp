@@ -8,7 +8,8 @@ Date: 03/08/2021
 */
 
 #include <SDL2/SDL.h>
-#include "libgfx_types.hpp"
+#include "libgfx.hpp"
+#include <iostream>
 
 class SDL_Interface
 {
@@ -16,12 +17,12 @@ public:
     SDL_Interface(int width, int height, gfx::Bitmap &bitmap);
     ~SDL_Interface();
     void update_screen();
-    void wait_for_close();
+    void activate();
 
 private:
     gfx::Bitmap *map; //this is the bitmap that it will read from
-    int m_width;
-    int m_height;
+    unsigned int m_width;
+    unsigned int m_height;
     // SDL render stuff
     SDL_Event event;
     SDL_Renderer *renderer;
@@ -63,11 +64,24 @@ void SDL_Interface::update_screen()
 }
 
 //wait to hit the red "close" button
-void SDL_Interface::wait_for_close()
+void SDL_Interface::activate()
 {
-    while (1)
+    SDL_Event event;
+    bool quit = false;
+    while (false == quit)
     {
-        if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
+        SDL_PollEvent(&event);
+
+        switch (event.type)
+        {
+        case SDL_QUIT:
+            quit = true;
             break;
+        case SDL_MOUSEMOTION:
+            std::cout << "X: " << event.motion.x << " Y: " << event.motion.y << std::endl;
+            break;
+        default:
+            break;
+        }
     }
 }

@@ -44,8 +44,9 @@ int main()
     gfx::draw_line(bitmap, 400, 400, 300, 600);
     gfx::draw_line(bitmap, 400, 400, 500, 600);
     gfx::draw_line(bitmap, 400, 400, 500, 200);
+
     sdl.update_screen();
-    sdl.wait_for_close();
+    sdl.activate();
 
     return 0;
 }
