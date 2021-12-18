@@ -4,7 +4,6 @@
 
 namespace gui
 {
-
     class Window
     {
     public:
@@ -12,13 +11,16 @@ namespace gui
         ~Window();
         void show();
         void hide();
-        void position_at(shapes::Point pos);
+        void set_location(shapes::Point new_pos);
+        shapes::Point location();
+        gfx::Bitmap *slate();
 
     private:
         unsigned int m_width;
         unsigned int m_height;
-        gfx::Bitmap m_bitmap;
+        gfx::Bitmap m_slate;
         shapes::Point m_location;
+        bool m_hidden;
     };
 
 }

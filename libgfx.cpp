@@ -4,7 +4,7 @@
 #include <iostream>
 
 //Circles
-void gfx::draw_circle(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned int r)
+void gfx::draw_circle(Bitmap &bitmap, const int x0, const int y0, const unsigned int r)
 {
     shapes::Circle circle = shapes::calculate_circle(x0, y0, r);
 
@@ -16,7 +16,7 @@ void gfx::draw_circle(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned
     }
 }
 
-void gfx::fill_circle(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned int r)
+void gfx::fill_circle(Bitmap &bitmap, const int x0, const int y0, const unsigned int r)
 {
     shapes::Circle circle = shapes::calculate_circle(x0, y0, r);
 
@@ -29,7 +29,7 @@ void gfx::fill_circle(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned
 }
 
 //Ellipses
-void gfx::draw_ellipse(Bitmap &bitmap, unsigned int x, unsigned int y, unsigned int r_w, unsigned int r_h)
+void gfx::draw_ellipse(Bitmap &bitmap, const int x, const int y, const unsigned int r_w, const unsigned int r_h)
 {
     shapes::Ellipse ellipse = shapes::calculate_ellipse(x, y, r_w, r_h);
     for (int i = 0; i < ellipse.parimeter.size(); i++)
@@ -42,7 +42,7 @@ void gfx::draw_ellipse(Bitmap &bitmap, unsigned int x, unsigned int y, unsigned 
 }
 
 //Arcs
-void gfx::draw_arc(Bitmap &bitmap, unsigned int x, unsigned int y, unsigned int r, unsigned short theta_1, unsigned short theta_2)
+void gfx::draw_arc(Bitmap &bitmap, const int x, const int y, const unsigned int r, const unsigned short theta_1, const unsigned short theta_2)
 {
     shapes::Arc arc = shapes::calculate_arc(x, y, r, theta_1, theta_2);
     for (int i = 0; i < arc.parimeter.size(); i++)
@@ -54,7 +54,7 @@ void gfx::draw_arc(Bitmap &bitmap, unsigned int x, unsigned int y, unsigned int 
 }
 
 //Lines
-void gfx::draw_line(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1)
+void gfx::draw_line(Bitmap &bitmap, const int x0, const int y0, const int x1, const int y1)
 {
     shapes::Line line = shapes::calculate_line(x0, y0, x1, y1);
 
@@ -64,7 +64,7 @@ void gfx::draw_line(Bitmap &bitmap, unsigned int x0, unsigned int y0, unsigned i
     }
 }
 
-void gfx::draw_line(Bitmap &bitmap, shapes::Point a, shapes::Point b)
+void gfx::draw_line(Bitmap &bitmap, const shapes::Point a, const shapes::Point b)
 {
     draw_line(bitmap, a.x, a.y, b.x, b.y);
 }
@@ -75,7 +75,7 @@ void gfx::draw_line(Bitmap &bitmap, shapes::Line line)
 }
 
 //Rectangles
-void gfx::draw_rect(Bitmap &bitmap, unsigned int x, unsigned int y, unsigned int h, unsigned int w)
+void gfx::draw_rect(Bitmap &bitmap, const int x, const int y, const unsigned int h, const unsigned int w)
 {
     shapes::Rect rect = shapes::calculate_rect(x, y, w, h);
     draw_line(bitmap, rect.sides.a);
@@ -84,12 +84,12 @@ void gfx::draw_rect(Bitmap &bitmap, unsigned int x, unsigned int y, unsigned int
     draw_line(bitmap, rect.sides.d);
 }
 
-void gfx::draw_rect(Bitmap &bitmap, shapes::Point origin, unsigned int h, unsigned int w)
+void gfx::draw_rect(Bitmap &bitmap, const shapes::Point origin, const unsigned int h, const unsigned int w)
 {
     draw_rect(bitmap, origin.x, origin.y, h, w);
 }
 
-void gfx::fill_rect(Bitmap &bitmap, unsigned int x, unsigned int y, unsigned int h, unsigned int w)
+void gfx::fill_rect(Bitmap &bitmap, const int x, const int y, const unsigned int h, const unsigned int w)
 {
     shapes::Rect rect = shapes::calculate_rect(x, y, w, h);
     for (int i = 0; i < rect.sides.a.points.size(); i++)
@@ -98,7 +98,7 @@ void gfx::fill_rect(Bitmap &bitmap, unsigned int x, unsigned int y, unsigned int
     }
 }
 
-void gfx::fill_rect(Bitmap &bitmap, shapes::Point origin, unsigned int h, unsigned int w)
+void gfx::fill_rect(Bitmap &bitmap, const shapes::Point origin, const unsigned int h, const unsigned int w)
 {
     fill_rect(bitmap, origin.x, origin.y, h, w);
 }

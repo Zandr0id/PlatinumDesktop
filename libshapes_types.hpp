@@ -6,19 +6,19 @@ namespace shapes
 {
     struct Point
     {
-        unsigned int x;
-        unsigned int y;
+        int x;
+        int y;
         Point()
         {
             x = 0;
             y = 0;
         }
-        Point(unsigned int x0, unsigned int y0)
+        Point(int x0, int y0)
         {
             x = x0;
             y = y0;
         }
-        void set(unsigned int x0, unsigned int y0)
+        void set(int x0, int y0)
         {
             x = x0;
             y = y0;

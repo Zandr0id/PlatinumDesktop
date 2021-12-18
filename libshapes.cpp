@@ -156,7 +156,7 @@ shapes::Line shapes::calculate_line(unsigned int x0, unsigned int y0, unsigned i
 shapes::Circle shapes::calculate_circle(unsigned int x0, unsigned int y0, unsigned int r)
 {
     Circle ret;
-    ret.radius = r;
+    ret.radius = --r;
     ret.center.x = x0;
     ret.center.y = y0;
 
@@ -247,6 +247,8 @@ shapes::Rect shapes::calculate_rect(unsigned int x, unsigned int y, unsigned int
 {
     shapes::Rect ret;
     shapes::Line tmp;
+    w--;
+    h--;
 
     //set the corners in a ccw fasion, starting with top left
     ret.corners.a.set(x, y);
