@@ -283,7 +283,7 @@ shapes::Arc shapes::calculate_arc(unsigned int x, unsigned int y, unsigned int r
     Circle base = calculate_circle(x, y, r);
     std::cout << x << " " << y << " " << r << std::endl;
 
-    //standard trig functions assume 0 deg is down, but we want up, wo
+    //standard trig functions assume 0 deg is down, but we want up, so...
     theta_1 += 180;
     theta_2 += 180;
 
@@ -300,7 +300,7 @@ shapes::Arc shapes::calculate_arc(unsigned int x, unsigned int y, unsigned int r
     {
         for (int j = 0; j < start_angle.points.size(); j++)
         {
-            std::cout << "< " << base.parimeter[i].x << "," << base.parimeter[i].y << ">  ---  < " << start_angle.points[j].x << "," << start_angle.points[j].y << ">\n";
+            //std::cout << "< " << base.parimeter[i].x << "," << base.parimeter[i].y << ">  ---  < " << start_angle.points[j].x << "," << start_angle.points[j].y << ">\n";
             if (base.parimeter[i] == start_angle.points[j])
             {
                 start_index = i;
@@ -308,7 +308,7 @@ shapes::Arc shapes::calculate_arc(unsigned int x, unsigned int y, unsigned int r
             }
         }
     }
-    std::cout << start_index << std::endl;
+    //std::cout << start_index << std::endl;
 
     angle = (theta_2) * (PI / 180.0);
     opp = sin(angle) * r;

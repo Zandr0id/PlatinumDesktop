@@ -88,10 +88,10 @@ namespace gfx
         {
             Pixel *tmp_array = new Pixel[width * height]; //easier to keep it 1D and transform to 2D as needed
 
-            for (int i = 0; i < (width * height); i++)
-            {
-                tmp_array[i].set(0, 0, 0, 0);
-            }
+            // for (int i = 0; i < (width * height); i++)
+            // {
+            //     tmp_array[i].set(0, 0, 0, 0);
+            // }
 
             m_data = tmp_array;
             m_width = width;
@@ -128,14 +128,14 @@ namespace gfx
             m_data[(m_width * y) + x] = tmp;
         }
 
-        void width(int *width)
+        void width(unsigned int &width)
         {
-            *width = m_width;
+            width = m_width;
         }
 
-        void height(int *height)
+        void height(unsigned int &height)
         {
-            *height = m_height;
+            height = m_height;
         }
 
     private:
