@@ -77,7 +77,7 @@ namespace gfx
         {
             m_red = c.m_red;
             m_green = c.m_green;
-            m_blue = c.m_green;
+            m_blue = c.m_blue;
             m_alpha = c.m_alpha;
         }
 
