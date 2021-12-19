@@ -9,7 +9,9 @@ Desktop::Desktop(const unsigned int width, const unsigned int height) : m_screen
 
     //hook up the event loop thread
     m_event_thread = std::thread(&Desktop::event_loop, this);
+    m_draw_thread = std::thread(&Desktop::draw_loop, this);
     m_event_thread.join();
+    m_draw_thread.join();
 }
 
 Desktop::~Desktop()
@@ -31,10 +33,9 @@ void Desktop::add_event(Event event)
 
 void Desktop::event_loop()
 {
-    std::cout << "starting loop" << std::endl;
+    std::cout << "Event Loop" << std::endl;
     SDL_Event event;
 
-    create_window(300, 200, shapes::Point(0, 0));
     //create_window(300, 200, shapes::Point(40, 60));
 
     //m_screen_space.stamp_with(*(m_window_list[0]->slate()), shapes::Point(50, 50));
@@ -89,11 +90,12 @@ void Desktop::event_loop()
 
     while (true == m_running)
     {
-        if (m_window_list[0]->location().x > 500)
-        {
-            m_window_list[0]->set_location(shapes::Point(0, 0));
-        }
-        m_window_list[0]->set_location(shapes::Point((m_window_list[0]->location().x) + 5, 0));
+
+        // if (m_window_list[0]->location().x > 500)
+        // {
+        //     m_window_list[0]->set_location(shapes::Point(0, 0));
+        // }
+        // m_window_list[0]->set_location(shapes::Point((m_window_list[0]->location().x) + 5, 0));
 
         SDL_PollEvent(&event);
 
@@ -107,9 +109,34 @@ void Desktop::event_loop()
         default:
             break;
         }
+    }
+
+    std::cout << "Event Loop end" << std::endl;
+}
+
+void Desktop::draw_loop()
+{
+    std::cout << "Draw Loop" << std::endl;
+    create_window(100, 50, shapes::Point(0, 0));
+    create_window(400, 150, shapes::Point(255, 255));
+
+    shapes::Circle path = shapes::calculate_circle(250, 250, 100);
+    gfx::draw_circle(m_background, 250, 250, 100);
+
+    int j = 0;
+    while (true == m_running)
+    {
+
+        if (j >= path.parimeter.size())
+        {
+            j = 0;
+        }
+        m_window_list[0]->set_location(path.parimeter[j]);
+        j += 10;
 
         composit_screen();
     }
+    std::cout << "Draw Loop end" << std::endl;
 }
 
 void Desktop::composit_screen()

@@ -25,6 +25,9 @@ private:
     std::thread m_event_thread;
     bool m_running;
 
+    void draw_loop();
+    std::thread m_draw_thread;
+
     //gfx definitions
     gfx::Bitmap m_background;
     gfx::Bitmap m_screen_space;
