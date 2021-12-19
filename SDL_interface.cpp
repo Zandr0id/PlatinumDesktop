@@ -23,17 +23,21 @@ SDL_Interface::~SDL_Interface()
 
 void SDL_Interface::dump_screen()
 {
-    for (int h = 0; h < m_height; h++)
-    {
-        for (int w = 0; w < m_width; ++w)
-        {
-            gfx::Pixel tmp(map->pixel_at(w, h));
-            //Alpha will already have been delt with by this point
-            //Only care about the RGB
-            SDL_SetRenderDrawColor(renderer, tmp.red(), tmp.green(), tmp.blue(), 255);
-            SDL_RenderDrawPoint(renderer, w, h);
-        }
-    }
+    // for (int h = 0; h < m_height; h++)
+    // {
+    //     for (int w = 0; w < m_width; ++w)
+    //     {
+    //         gfx::Pixel tmp(map->pixel_at(w, h));
+    //         //Alpha will already have been delt with by this point
+    //         //Only care about the RGB
+    //         SDL_SetRenderDrawColor(renderer, tmp.red(), tmp.green(), tmp.blue(), 255);
+    //         SDL_RenderDrawPoint(renderer, w, h);
+    //     }
+    // }
+
+    SDL_Surface *new_surf = SDL_CreateRGBSurfaceFrom(map->m_data, m_width, m_height, 32, m_width * 4, 0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff);
+    SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, new_surf);
+    SDL_RenderCopy(renderer, texture, NULL, NULL);
     SDL_RenderPresent(renderer);
 }
 

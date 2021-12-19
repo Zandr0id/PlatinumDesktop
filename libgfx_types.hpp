@@ -91,6 +91,8 @@ namespace gfx
     //the Bitmap is a 2D array of pixels
     class Bitmap
     {
+        //friend class SDL_interface;
+
     public:
         Bitmap(uint32_t width, uint32_t height, Pixel color)
         {
@@ -184,9 +186,8 @@ namespace gfx
                 }
             }
         }
-
+        Pixel *m_data; //TODO: THIS SHOULD BE PRIVATE, but no better way to get it into SDL_interface for now
     private:
-        Pixel *m_data;
         int m_width;
         int m_height;
     };
