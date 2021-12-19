@@ -35,31 +35,8 @@ void SDL_Interface::dump_screen()
     //     }
     // }
 
-    SDL_Surface *new_surf = SDL_CreateRGBSurfaceFrom(map->m_data, m_width, m_height, 32, m_width * 4, 0xff000000, 0x00ff0000, 0x0000ff00, 0x000000ff);
+    SDL_Surface *new_surf = SDL_CreateRGBSurfaceFrom(map->m_data, m_width, m_height, 32, m_width * 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, new_surf);
     SDL_RenderCopy(renderer, texture, NULL, NULL);
     SDL_RenderPresent(renderer);
 }
-
-//wait to hit the red "close" button
-// void SDL_Interface::activate()
-// {
-//     SDL_Event event;
-//     bool quit = false;
-//     while (false == quit)
-//     {
-//         SDL_PollEvent(&event);
-
-//         switch (event.type)
-//         {
-//         case SDL_QUIT:
-//             quit = true;
-//             break;
-//         case SDL_MOUSEMOTION:
-//             //std::cout << "X: " << event.motion.x << " Y: " << event.motion.y << std::endl;
-//             break;
-//         default:
-//             break;
-//         }
-//     }
-// }

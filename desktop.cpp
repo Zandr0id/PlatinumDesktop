@@ -1,7 +1,7 @@
 #include "desktop.hpp"
 
 Desktop::Desktop(const unsigned int width, const unsigned int height) : m_screen_space(width, height),
-                                                                        m_background(width, height, gfx::Pixel(0, 200, 0, 255)),
+                                                                        m_background(width, height, gfx::Pixel(0, 0, 0, 255)),
                                                                         m_sdl(m_screen_space)
 {
     std::cout << "Desktop constructor" << std::endl;
