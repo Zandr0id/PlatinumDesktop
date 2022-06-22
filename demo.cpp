@@ -7,10 +7,10 @@ constexpr int SCREEN_HEIGHT = 500;
 
 int main()
 {
-    std::cout << "Main Thread" << std::endl;
+    std::cout << "Program Start" << std::endl;
 
     Desktop d(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    std::cout << "Main Thread end" << std::endl;
+    std::cout << "Program End" << std::endl;
     return 0;
 }

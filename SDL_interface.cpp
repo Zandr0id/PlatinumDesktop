@@ -12,6 +12,7 @@ SDL_Interface::SDL_Interface(gfx::Bitmap &bitmap, bool show_native_cursor)
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
     SDL_ShowCursor(show_native_cursor);
+
     std::cout << "SDL_interface constructed" << std::endl;
 }
 

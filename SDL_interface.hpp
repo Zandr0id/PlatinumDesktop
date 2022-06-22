@@ -19,6 +19,7 @@ public:
     SDL_Interface(gfx::Bitmap &bitmap, bool show_native_cursor);
     ~SDL_Interface();
     void dump_screen();
+    void event_check();
     //void activate();
 
 private:
