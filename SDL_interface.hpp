@@ -11,11 +11,12 @@ Date: 03/08/2021
 #include <SDL2/SDL.h>
 #include "libgfx.hpp"
 #include <iostream>
+#include <thread>
 
 class SDL_Interface
 {
 public:
-    SDL_Interface(gfx::Bitmap &bitmap);
+    SDL_Interface(gfx::Bitmap &bitmap, bool show_native_cursor);
     ~SDL_Interface();
     void dump_screen();
     //void activate();

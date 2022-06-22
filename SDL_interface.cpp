@@ -1,6 +1,6 @@
 #include "SDL_interface.hpp"
 
-SDL_Interface::SDL_Interface(gfx::Bitmap &bitmap)
+SDL_Interface::SDL_Interface(gfx::Bitmap &bitmap, bool show_native_cursor)
 {
     map = &bitmap;
     //m_width = width;
@@ -11,6 +11,7 @@ SDL_Interface::SDL_Interface(gfx::Bitmap &bitmap)
     SDL_CreateWindowAndRenderer(m_width, m_height, 0, &window, &renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
+    SDL_ShowCursor(show_native_cursor);
     std::cout << "SDL_interface constructed" << std::endl;
 }
 
@@ -23,18 +24,6 @@ SDL_Interface::~SDL_Interface()
 
 void SDL_Interface::dump_screen()
 {
-    // for (int h = 0; h < m_height; h++)
-    // {
-    //     for (int w = 0; w < m_width; ++w)
-    //     {
-    //         gfx::Pixel tmp(map->pixel_at(w, h));
-    //         //Alpha will already have been delt with by this point
-    //         //Only care about the RGB
-    //         SDL_SetRenderDrawColor(renderer, tmp.red(), tmp.green(), tmp.blue(), 255);
-    //         SDL_RenderDrawPoint(renderer, w, h);
-    //     }
-    // }
-
     SDL_Surface *new_surf = SDL_CreateRGBSurfaceFrom(map->m_data, m_width, m_height, 32, m_width * 4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
     SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, new_surf);
     SDL_RenderCopy(renderer, texture, NULL, NULL);

@@ -7,6 +7,14 @@
 #include "thread"
 #include "window.hpp"
 
+struct MouseState
+{
+    unsigned int mouseX;
+    unsigned int mouseY;
+    bool left_mouse_down;
+    bool right_mouse_down;
+};
+
 class Desktop
 {
 public:
@@ -43,6 +51,8 @@ private:
     // unsigned int m_mouse_y;
 
     void composit_screen();
+
+    MouseState m_mouse_state;
 };
 
 #endif //LIB_GUI_HPP

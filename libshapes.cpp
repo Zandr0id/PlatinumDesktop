@@ -4,7 +4,7 @@
 #include <iostream>
 
 //Complex line calculator for different types of lines
-//retursn a line object with a vector containing all points on the line
+//returns a line object with a vector containing all points on the line
 //always goes from left to right
 shapes::Line shapes::calculate_line(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1)
 {
@@ -283,7 +283,7 @@ shapes::Arc shapes::calculate_arc(unsigned int x, unsigned int y, unsigned int r
     ret.theta_2 = theta_2;
 
     Circle base = calculate_circle(x, y, r);
-    std::cout << x << " " << y << " " << r << std::endl;
+    //std::cout << x << " " << y << " " << r << std::endl;
 
     //standard trig functions assume 0 deg is down, but we want up, so...
     theta_1 += 180;

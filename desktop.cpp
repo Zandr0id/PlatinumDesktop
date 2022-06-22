@@ -2,7 +2,7 @@
 
 Desktop::Desktop(const unsigned int width, const unsigned int height) : m_screen_space(width, height),
                                                                         m_background(width, height, gfx::Pixel(0, 0, 0, 255)),
-                                                                        m_sdl(m_screen_space)
+                                                                        m_sdl(m_screen_space, false)
 {
     std::cout << "Desktop constructor" << std::endl;
     m_running = true;
@@ -38,24 +38,52 @@ void Desktop::event_loop()
 
     while (true == m_running)
     {
-
-        // if (m_window_list[0]->location().x > 500)
-        // {
-        //     m_window_list[0]->set_location(shapes::Point(0, 0));
-        // }
-        // m_window_list[0]->set_location(shapes::Point((m_window_list[0]->location().x) + 5, 0));
-
-        SDL_PollEvent(&event);
-
-        switch (event.type)
+        while (SDL_PollEvent(&event))
         {
-        case SDL_QUIT:
-            m_running = false;
-            break;
-        case SDL_MOUSEMOTION:
-            break;
-        default:
-            break;
+
+            // if (m_window_list[0]->location().x > 500)
+            // {
+            //     m_window_list[0]->set_location(shapes::Point(0, 0));
+            // }
+            // m_window_list[0]->set_location(shapes::Point((m_window_list[0]->location().x) + 5, 0));
+
+            switch (event.type)
+            {
+            case SDL_QUIT:
+                m_running = false;
+                break;
+            case SDL_MOUSEMOTION:
+                m_mouse_state.mouseX = event.motion.x;
+                m_mouse_state.mouseY = event.motion.y;
+                //printf("x:%i y:%i", m_mouse_state.mouseX, m_mouse_state.mouseY);
+                break;
+            case SDL_MOUSEBUTTONDOWN:
+                if ((event.button.button == SDL_BUTTON_LEFT) && (false == m_mouse_state.left_mouse_down))
+                {
+                    m_mouse_state.left_mouse_down = true;
+                    std::cout << "left down" << std::endl;
+                }
+                else if ((event.button.button == SDL_BUTTON_RIGHT) && (false == m_mouse_state.right_mouse_down))
+                {
+                    m_mouse_state.right_mouse_down = true;
+                    std::cout << "right down" << std::endl;
+                }
+                break;
+            case SDL_MOUSEBUTTONUP:
+                if ((event.button.button == SDL_BUTTON_LEFT) && (true == m_mouse_state.left_mouse_down))
+                {
+                    m_mouse_state.left_mouse_down = false;
+                    std::cout << "left up" << std::endl;
+                }
+                else if ((event.button.button == SDL_BUTTON_RIGHT) && (true == m_mouse_state.right_mouse_down))
+                {
+                    m_mouse_state.right_mouse_down = false;
+                    std::cout << "right up" << std::endl;
+                }
+                break;
+            default:
+                break;
+            }
         }
     }
 
@@ -72,7 +100,7 @@ void Desktop::draw_loop()
     gfx::draw_color = gfx::Pixel(255, 0, 255, 255);
     gfx::fill_circle(m_background, 250, 250, 100);
 
-    int j = 0;
+    // int j = 0;
     while (true == m_running)
     {
         // gfx::draw_color.set(255, 0, 0, 255);
@@ -120,13 +148,15 @@ void Desktop::draw_loop()
         // gfx::draw_line(m_screen_space, 400, 400, 500, 600);
         // gfx::draw_line(m_screen_space, 400, 400, 500, 200);
 
+        /*
         if (j >= path.parimeter.size())
         {
             j = 0;
         }
         m_window_list[1]->set_location(path.parimeter[j]);
         j += 10;
-
+*/
+        m_window_list[1]->set_location(shapes::Point(m_mouse_state.mouseX, m_mouse_state.mouseY));
         composit_screen();
     }
     std::cout << "Draw Loop end" << std::endl;
