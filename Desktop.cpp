@@ -105,7 +105,7 @@ void Desktop::MainLoop()
                 m_mouse_state.location.x = e.data.mouse_move_event.x;
                 m_mouse_state.location.y = e.data.mouse_move_event.y;
 
-                if (m_mouse_state.left_mouse_down)
+                if (m_mouse_state.left_mouse_down && (m_focused_window->IsMouseOver(m_mouse_state.location)))
                 {
                     m_focused_window->SetLocation(m_mouse_state.location - m_mouse_offset_to_focused_window);
                 }
@@ -119,7 +119,7 @@ void Desktop::MainLoop()
                     for (int i = m_window_list.size() - 1; i >= 0; i--)
                     {
                         gui::Window *tmp = m_window_list[i];
-                        if (tmp->Bounds().does_contain_point(shapes::Point(m_mouse_state.location.x, m_mouse_state.location.y), tmp->Location()))
+                        if (tmp->IsMouseOver(m_mouse_state.location))
                         {
                             // this one gets the click, so move it to the top of the list and give it focus
                             m_focused_window = tmp;

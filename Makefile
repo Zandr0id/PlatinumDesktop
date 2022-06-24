@@ -6,7 +6,7 @@ CPP = clang++
 
 BUILD_FLAGS = -std=c++17 -g
 
-LINK_FLAGS = -lSDL2 -lpthread
+LINK_FLAGS = -lSDL2
 
 build : $(OUTPUT_FILE)
 

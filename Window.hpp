@@ -14,6 +14,7 @@ namespace gui
         void Show();
         void Hide();
         bool IsHidden() { return m_hidden; };
+        bool IsMouseOver(shapes::Point mouse);
         void SetLocation(shapes::Point new_pos);
         shapes::Rect Bounds() { return m_bounds; };
         shapes::Point Location();

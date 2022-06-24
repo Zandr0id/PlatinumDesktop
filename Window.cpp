@@ -40,3 +40,8 @@ void gui::Window::Show()
 {
     m_hidden = false;
 }
+
+bool gui::Window::IsMouseOver(shapes::Point mouse)
+{
+    return m_bounds.does_contain_point(mouse, m_location);
+}
