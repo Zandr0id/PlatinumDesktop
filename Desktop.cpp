@@ -114,8 +114,7 @@ void Desktop::MainLoop()
                     for (int i = m_window_list.size() - 1; i >= 0; i--)
                     {
                         gui::Window *tmp = m_window_list[i];
-                        shapes::Rect edges = shapes::calculate_rect(tmp->Location().x, tmp->Location().y, tmp->Width(), tmp->Height());
-                        if (edges.does_contain_point(shapes::Point(m_mouse_state.location.x, m_mouse_state.location.y)))
+                        if (tmp->Bounds().does_contain_point(shapes::Point(m_mouse_state.location.x, m_mouse_state.location.y), tmp->Location()))
                         {
                             // this one gets the click, so move it to the top of the list and give it focus
                             m_focused_window = tmp;
