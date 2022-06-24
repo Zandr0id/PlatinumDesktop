@@ -1,6 +1,6 @@
 #include "libgfx.hpp"
 //#include "SDL_interface.hpp"
-#include "desktop.hpp"
+#include "Desktop.hpp"
 
 constexpr int SCREEN_WIDTH = 500;
 constexpr int SCREEN_HEIGHT = 500;
