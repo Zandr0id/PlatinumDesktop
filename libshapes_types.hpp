@@ -36,6 +36,11 @@ namespace shapes
         }
     };
 
+    struct Shape
+    {
+        virtual bool does_contain_point(const Point point) = 0;
+    };
+
     struct Line
     {
         Point a;
@@ -53,6 +58,7 @@ namespace shapes
             a = a0;
             b = b0;
         }
+        // virtual bool does_contain_point(Point point);
     };
 
     struct Circle
@@ -60,6 +66,7 @@ namespace shapes
         Point center;
         unsigned int radius;
         std::vector<Point> parimeter;
+        // virtual bool does_contain_point(Point point);
     };
 
     struct Triangle
@@ -77,9 +84,10 @@ namespace shapes
             Line b;
             Line c;
         } sides;
+        // virtual bool does_contain_point(Point point);
     };
 
-    struct Rect
+    struct Rect : public Shape
     {
         std::vector<Point> parimeter;
         struct corners
@@ -96,6 +104,7 @@ namespace shapes
             Line c;
             Line d;
         } sides;
+        virtual bool does_contain_point(const Point point);
     };
 
     struct Arc
@@ -105,6 +114,7 @@ namespace shapes
         unsigned int radius;
         unsigned short theta_1;
         unsigned short theta_2;
+        // virtual bool does_contain_point(Point point);
     };
 
     struct Ellipse
@@ -113,13 +123,15 @@ namespace shapes
         Point center;
         unsigned int r_w;
         unsigned int r_h;
+        // virtual bool does_contain_point(Point point);
     };
 
     struct Polygon
     {
         std::vector<Line> sides;
         std::vector<Point> parimeter;
+        // virtual bool does_contain_point(Point point);
     };
 }
 
-#endif //LIB_SHAPES_TYPES_HPP_
+#endif // LIB_SHAPES_TYPES_HPP_
