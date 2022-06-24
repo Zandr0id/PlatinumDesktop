@@ -34,11 +34,25 @@ namespace shapes
                 return false;
             }
         }
+        Point operator+(const Point &b)
+        {
+            Point tmp;
+            tmp.x = this->x + b.x;
+            tmp.y = this->y + b.y;
+            return tmp;
+        }
+        Point operator-(const Point &b)
+        {
+            Point tmp;
+            tmp.x = this->x - b.x;
+            tmp.y = this->y - b.y;
+            return tmp;
+        }
     };
 
     struct Shape
     {
-        virtual bool does_contain_point(const Point point) = 0;
+        virtual bool does_contain_point(const Point point, const Point absolute_offset) = 0;
     };
 
     struct Line
@@ -104,7 +118,7 @@ namespace shapes
             Line c;
             Line d;
         } sides;
-        virtual bool does_contain_point(const Point point);
+        virtual bool does_contain_point(const Point point, const Point absolute_offset);
     };
 
     struct Arc
