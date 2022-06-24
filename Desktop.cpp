@@ -104,6 +104,11 @@ void Desktop::MainLoop()
             case MOUSE_MOVE:
                 m_mouse_state.location.x = e.data.mouse_move_event.x;
                 m_mouse_state.location.y = e.data.mouse_move_event.y;
+
+                if (m_mouse_state.left_mouse_down)
+                {
+                    m_focused_window->SetLocation(m_mouse_state.location - m_mouse_offset_to_focused_window);
+                }
                 break;
             case MOUSE_BUTTON:
                 m_mouse_state.left_mouse_down = e.data.mouse_button_event.left_down;
@@ -120,6 +125,7 @@ void Desktop::MainLoop()
                             m_focused_window = tmp;
                             m_window_list.insert(m_window_list.end(), tmp);
                             m_window_list.erase(m_window_list.begin() + i);
+                            m_mouse_offset_to_focused_window = m_mouse_state.location - m_focused_window->Location();
                             break;
                         }
                     }

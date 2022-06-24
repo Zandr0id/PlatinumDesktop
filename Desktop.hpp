@@ -45,6 +45,7 @@ private:
     // cursor stuff
     MouseState m_mouse_state;
     gfx::Bitmap m_mouse_image;
+    shapes::Point m_mouse_offset_to_focused_window;
 };
 
 #endif // LIB_GUI_HPP
