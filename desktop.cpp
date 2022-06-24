@@ -42,32 +42,35 @@ void Desktop::SDL_event_check()
             e.type = MOUSE_MOVE;
             e.data.mouse_move_event.x = event.motion.x;
             e.data.mouse_move_event.y = event.motion.y;
-            add_event(e);
+            m_events_queue.PushEvent(e);
             break;
         case SDL_MOUSEBUTTONDOWN:
             e.type = MOUSE_BUTTON;
             if ((event.button.button == SDL_BUTTON_LEFT) && (false == m_mouse_state.left_mouse_down))
             {
-                m_mouse_state.left_mouse_down = true;
-                add_event(e);
+                e.data.mouse_button_event.left_down = true;
+                m_events_queue.PushEvent(e);
             }
             else if ((event.button.button == SDL_BUTTON_RIGHT) && (false == m_mouse_state.right_mouse_down))
             {
-                m_mouse_state.right_mouse_down = true;
-                add_event(e);
+                e.data.mouse_button_event.right_down = true;
+                m_events_queue.PushEvent(e);
+                ;
             }
             break;
         case SDL_MOUSEBUTTONUP:
             e.type = MOUSE_BUTTON;
             if ((event.button.button == SDL_BUTTON_LEFT) && (true == m_mouse_state.left_mouse_down))
             {
-                m_mouse_state.left_mouse_down = false;
-                add_event(e);
+                e.data.mouse_button_event.left_down = false;
+                m_events_queue.PushEvent(e);
+                ;
             }
             else if ((event.button.button == SDL_BUTTON_RIGHT) && (true == m_mouse_state.right_mouse_down))
             {
-                m_mouse_state.right_mouse_down = false;
-                add_event(e);
+                e.data.mouse_button_event.left_down = false;
+                m_events_queue.PushEvent(e);
+                ;
             }
             break;
 
@@ -93,9 +96,9 @@ void Desktop::main_loop()
 
         SDL_event_check(); // TODO: remove this eventually
         // process through events and set state accordingly
-        while (false == m_events.empty())
+        while (false == m_events_queue.IsEmpty())
         {
-            Event e = m_events.front();
+            Event e = m_events_queue.PopNextEvent();
             switch (e.type)
             {
             case MOUSE_MOVE:
@@ -125,7 +128,6 @@ void Desktop::main_loop()
             default:
                 break;
             }
-            m_events.pop();
         }
 
         // gfx::draw_color.set(255, 0, 0, 255);

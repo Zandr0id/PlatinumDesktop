@@ -1,7 +1,9 @@
 #ifndef WINDOW_HPP
 #define WINDOW_HPP
 #include "libgfx.hpp"
+#include "event_queue.hpp"
 #include <string>
+#include <queue>
 
 namespace gui
 {
@@ -23,9 +25,11 @@ namespace gui
         std::string m_name;
         unsigned int m_width;
         unsigned int m_height;
-        gfx::Bitmap m_slate;
         shapes::Point m_location;
         bool m_hidden;
+        gfx::Bitmap m_slate; // the bitmap to draw the window on
+
+        EventQueue m_event_queue;
     };
 
 }

@@ -1,7 +1,7 @@
 #ifndef LIB_GUI_HPP
 #define LIB_GUI_HPP
-#include "events.hpp"
-#include "queue"
+#include "event_queue.hpp"
+#include <queue>
 #include "libgfx.hpp"
 #include "SDL_interface.hpp"
 #include "thread"
@@ -20,7 +20,6 @@ public:
     Desktop(const unsigned int width, const unsigned int height);
     ~Desktop();
     void activate();
-    void add_event(const Event event) { m_events.push(event); };
     bool get_running() { return m_running; };
     MouseState get_mouse_state() { return m_mouse_state; };
     void create_window(const unsigned int w, const unsigned int h, const shapes::Point location, std::string name);
@@ -43,7 +42,7 @@ private:
     gui::Window *m_focused_window;
     void composit_screen();
 
-    std::queue<Event> m_events;
+    EventQueue m_events_queue;
 
     // cursor stuff
     MouseState m_mouse_state;
