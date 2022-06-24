@@ -1,5 +1,7 @@
 #include "SDL_interface.hpp"
 
+static GLuint texture;
+
 SDL_Interface::SDL_Interface(gfx::Bitmap &bitmap, bool show_native_cursor)
 {
     map = &bitmap;
@@ -8,12 +10,11 @@ SDL_Interface::SDL_Interface(gfx::Bitmap &bitmap, bool show_native_cursor)
     map->height(m_height);
     map->width(m_width);
     SDL_Init(SDL_INIT_VIDEO);
-    SDL_CreateWindowAndRenderer(m_width, m_height, 0, &window, &renderer);
+    SDL_CreateWindowAndRenderer(m_width, m_height, SDL_WINDOW_OPENGL, &window, &renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
     SDL_ShowCursor(show_native_cursor);
-
-    std::cout << "SDL_interface constructed" << std::endl;
+    gl = SDL_GL_CreateContext(window);
 }
 
 SDL_Interface::~SDL_Interface()

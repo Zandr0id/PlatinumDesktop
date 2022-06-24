@@ -25,7 +25,8 @@ Desktop::~Desktop()
     }
 }
 
-//translate SDL events into native events, so SDL can eventually be removed
+// TODO: eventually remove this
+// translate SDL events into native events, so SDL can eventually be removed
 void Desktop::SDL_event_check()
 {
     SDL_Event event;
@@ -79,18 +80,19 @@ void Desktop::SDL_event_check()
 void Desktop::main_loop()
 {
     std::cout << "Main Loop Start" << std::endl;
-    create_window(400, 150, shapes::Point(255, 255));
-    create_window(100, 50, shapes::Point(0, 0));
+    create_window(400, 150, shapes::Point(255, 255), "Large");
+    create_window(100, 50, shapes::Point(230, 230), "Small");
 
     shapes::Circle path = shapes::calculate_circle(250, 250, 100);
     gfx::draw_color = gfx::Pixel(255, 0, 255, 255);
     gfx::fill_circle(m_background, 250, 250, 100);
 
+    int j = 0;
     while (true == m_running)
     {
 
-        SDL_event_check(); //TODO: remove this eventually
-
+        SDL_event_check(); // TODO: remove this eventually
+        // process through events and set state accordingly
         while (false == m_events.empty())
         {
             Event e = m_events.front();
@@ -100,6 +102,26 @@ void Desktop::main_loop()
                 m_mouse_state.location.x = e.data.mouse_move_event.x;
                 m_mouse_state.location.y = e.data.mouse_move_event.y;
                 break;
+            case MOUSE_BUTTON:
+                m_mouse_state.left_mouse_down = e.data.mouse_button_event.left_down;
+                m_mouse_state.right_mouse_down = e.data.mouse_button_event.right_down;
+
+                if (m_mouse_state.left_mouse_down)
+                {
+                    for (int i = m_window_list.size() - 1; i >= 0; i--)
+                    {
+                        gui::Window *tmp = m_window_list[i];
+                        shapes::Rect edges = shapes::calculate_rect(tmp->location().x, tmp->location().y, tmp->width(), tmp->height());
+                        if (edges.does_contain_point(shapes::Point(m_mouse_state.location.x, m_mouse_state.location.y)))
+                        {
+                            // this one gets the click, so move it to the top of the list and give it focus
+                            m_focused_window = tmp;
+                            m_window_list.insert(m_window_list.end(), tmp);
+                            m_window_list.erase(m_window_list.begin() + i);
+                            break;
+                        }
+                    }
+                }
             default:
                 break;
             }
@@ -151,6 +173,12 @@ void Desktop::main_loop()
         // gfx::draw_line(m_screen_space, 400, 400, 500, 600);
         // gfx::draw_line(m_screen_space, 400, 400, 500, 200);
 
+        // if (j > path.parimeter.size())
+        // {
+        //     j = 0;
+        // }
+        // m_window_list[1]->set_location(path.parimeter[j]);
+        // j += 10;
         composit_screen();
     }
     std::cout << "Main Loop End" << std::endl;
@@ -160,22 +188,25 @@ void Desktop::composit_screen()
 {
     m_screen_space.stamp_with(m_background, shapes::Point(0, 0));
 
-    //draw all windows
+    // draw all windows
     for (gui::Window *w : m_window_list)
     {
         m_screen_space.stamp_with(*(w->slate()), w->location());
     }
 
-    //draw the mouse cursor
+    // draw the mouse cursor
     m_screen_space.stamp_with(m_mouse_image, m_mouse_state.location);
 
     m_sdl.dump_screen();
 }
 
-void Desktop::create_window(const unsigned int w, const unsigned int h, const shapes::Point location)
+void Desktop::create_window(const unsigned int w, const unsigned int h, const shapes::Point location, std::string name)
 {
-    gui::Window *new_window = new gui::Window(w, h);
+    gui::Window *new_window = new gui::Window(w, h, name);
     new_window->set_location(location);
     new_window->show();
-    m_window_list.push_back(new_window);
+    // windows get drawn from back to front. Put the newest window on the
+    // end so it will be drawn on top, and mark it as the one that gets focus
+    m_window_list.insert(m_window_list.end(), new_window);
+    m_focused_window = new_window;
 }

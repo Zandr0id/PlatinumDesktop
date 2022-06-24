@@ -10,8 +10,9 @@ Date: 03/08/2021
 
 #include <SDL2/SDL.h>
 #include "libgfx.hpp"
-#include <iostream>
-#include <thread>
+#include <GL/glew.h>
+#include <SDL2/SDL_opengl.h>
+#include <GL/gl.h>
 
 class SDL_Interface
 {
@@ -20,14 +21,14 @@ public:
     ~SDL_Interface();
     void dump_screen();
     void event_check();
-    //void activate();
 
 private:
-    gfx::Bitmap *map; //this is the bitmap that it will read from
+    gfx::Bitmap *map; // this is the bitmap that it will read from
     unsigned int m_width;
     unsigned int m_height;
     // SDL render stuff
     SDL_Event event;
     SDL_Renderer *renderer;
     SDL_Window *window;
+    SDL_GLContext gl;
 };

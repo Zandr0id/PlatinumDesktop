@@ -1,7 +1,10 @@
 #include "window.hpp"
 #include "libshapes.hpp"
 
-gui::Window::Window(unsigned int width, unsigned int height) : m_width(width), m_height(height), m_slate(width, height, gfx::Pixel(0, 0, 0, 255))
+gui::Window::Window(unsigned int width, unsigned int height, std::string name) : m_name(name),
+                                                                                 m_width(width),
+                                                                                 m_height(height),
+                                                                                 m_slate(width, height, gfx::Pixel(0, 0, 0, 255))
 {
     m_hidden = true;
     gfx::draw_color.set(0, 255, 255, 255);
