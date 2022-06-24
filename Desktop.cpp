@@ -84,13 +84,13 @@ void Desktop::MainLoop()
 {
     std::cout << "Main Loop Start" << std::endl;
     CreateWindow(400, 150, shapes::Point(255, 255), "Large");
+    CreateWindow(400, 150, shapes::Point(200, 340), "Large");
     CreateWindow(100, 50, shapes::Point(230, 230), "Small");
 
     shapes::Circle path = shapes::calculate_circle(250, 250, 100);
     gfx::draw_color = gfx::Pixel(255, 0, 255, 255);
     gfx::fill_circle(m_background, 250, 250, 100);
 
-    int j = 0;
     while (true == m_running)
     {
 
@@ -130,57 +130,7 @@ void Desktop::MainLoop()
             }
         }
 
-        // gfx::draw_color.set(255, 0, 0, 255);
-        // gfx::draw_circle(m_screen_space, 40, 10, 25);
-        // gfx::draw_rect(m_screen_space, shapes::Point(20, 20), 180, 180);
-
-        // gfx::draw_line(m_screen_space, 400, 400, 400, 200);
-        // gfx::draw_line(m_screen_space, 400, 400, 200, 400);
-        // gfx::draw_line(m_screen_space, 400, 400, 400, 600);
-        // gfx::draw_line(m_screen_space, 400, 400, 600, 400);
-
-        // gfx::draw_color.set(255, 0, 0, 255);
-        // gfx::draw_line(m_screen_space, 400, 400, 400, 200);
-        // gfx::draw_line(m_screen_space, 400, 400, 200, 400);
-        // gfx::draw_line(m_screen_space, 400, 400, 400, 600);
-        // gfx::draw_line(m_screen_space, 400, 400, 600, 400);
-
-        // gfx::draw_color.set(0, 0, 0, 255);
-
-        // //gfx::draw_arc(bitmap, 500, 400, 20, 90, 140);
-        // gfx::draw_color.set(255, 0, 200, 255);
-        // gfx::fill_circle(m_screen_space, 600, 600, 100);
-        // gfx::draw_color.set(255, 255, 0, 125);
-        // gfx::draw_arc(m_screen_space, 300, 300, 200, 0, 45);
-        // gfx::fill_rect(m_screen_space, 10, 10, 50, 100);
-        // gfx::draw_color.set(0, 0, 255, 125);
-        // gfx::fill_rect(m_screen_space, 30, 30, 50, 100);
-        // gfx::draw_ellipse(m_screen_space, 400, 400, 100, 200);
-
-        // gfx::draw_color.set(255, 255, 0, 255);
-        // gfx::draw_line(m_screen_space, 400, 400, 600, 600);
-        // gfx::draw_line(m_screen_space, 400, 400, 200, 200);
-        // gfx::draw_line(m_screen_space, 400, 400, 600, 200);
-        // gfx::draw_line(m_screen_space, 400, 400, 200, 600);
-
-        // gfx::draw_color.set(0, 0, 255, 255);
-        // gfx::draw_line(m_screen_space, 400, 400, 200, 300);
-        // gfx::draw_line(m_screen_space, 400, 400, 600, 300);
-        // gfx::draw_line(m_screen_space, 400, 400, 200, 500);
-        // gfx::draw_line(m_screen_space, 400, 400, 600, 500);
-
-        // gfx::draw_color.set(0, 255, 255, 255);
-        // gfx::draw_line(m_screen_space, 400, 400, 300, 200);
-        // gfx::draw_line(m_screen_space, 400, 400, 300, 600);
-        // gfx::draw_line(m_screen_space, 400, 400, 500, 600);
-        // gfx::draw_line(m_screen_space, 400, 400, 500, 200);
-
-        // if (j > path.parimeter.size())
-        // {
-        //     j = 0;
-        // }
-        // m_window_list[1]->set_location(path.parimeter[j]);
-        // j += 10;
+        // calculate the screen and draw it!
         CompositScreen();
     }
     std::cout << "Main Loop End" << std::endl;
