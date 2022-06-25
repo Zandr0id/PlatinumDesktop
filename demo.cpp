@@ -1,36 +1,29 @@
 #include "libgfx.hpp"
-//#include "SDL_interface.hpp"
 #include "Desktop.hpp"
 #include "ErrorOr.hpp"
 
 constexpr int SCREEN_WIDTH = 1000;
 constexpr int SCREEN_HEIGHT = 1000;
 
-ErrorOr<bool> RunDesktop();
+ErrorOr<int> RunDesktop()
+{
+    Desktop d(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    ErrorOr<int> ret;
+    ret.MakeValue(0);
+    return ret;
+}
 
 int main()
 {
-
-    ErrorOr<bool> ret = RunDesktop();
-
+    ErrorOr<int> ret = RunDesktop();
     if (ret.IsError())
     {
-        if (ret.HasMessage())
-        {
-            std::cout << ret.Message() << std::endl;
-        }
         return 1;
+        std::cout << ret.Error().ToString() << std::endl;
     }
     else
     {
         return 0;
     }
-}
-
-ErrorOr<bool> RunDesktop()
-{
-    Desktop d(SCREEN_WIDTH, SCREEN_HEIGHT);
-
-    ErrorOr<bool> ret(true);
-    return ret;
 }
