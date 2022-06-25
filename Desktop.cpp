@@ -12,6 +12,13 @@ Desktop::Desktop(const unsigned int width, const unsigned int height) : m_screen
     gfx::fill_rect(m_mouse_image, 0, 0, 10, 10);
     gfx::draw_line(m_mouse_image, 0, 0, 20, 20);
 
+    /*
+        gfx::Bitmap *test;
+        int ret = gfx::load_bitmap(test, "test.bmp");
+        std::cout << test->width() << "x" << test->height() << std::endl;
+        m_screen_space.stamp_with(*test, shapes::Point(10, 10));
+    */
+
     MainLoop();
 }
 

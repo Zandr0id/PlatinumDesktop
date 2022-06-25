@@ -5,10 +5,8 @@ static GLuint texture;
 SDL_Interface::SDL_Interface(gfx::Bitmap &bitmap, bool show_native_cursor)
 {
     map = &bitmap;
-    //m_width = width;
-    //m_height = height;
-    map->height(m_height);
-    map->width(m_width);
+    m_height = map->height();
+    m_width = map->width();
     SDL_Init(SDL_INIT_VIDEO);
     SDL_CreateWindowAndRenderer(m_width, m_height, SDL_WINDOW_OPENGL, &window, &renderer);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
