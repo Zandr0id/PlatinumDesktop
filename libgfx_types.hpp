@@ -88,19 +88,17 @@ namespace gfx
         uint8_t m_alpha;
     };
 
-    //the Bitmap is a 2D array of pixels
+    // the Bitmap is a 2D array of pixels
     class Bitmap
     {
-        //friend class SDL_interface;
 
     public:
         Bitmap(uint32_t width, uint32_t height, Pixel color)
         {
-            Pixel *tmp_array = new Pixel[width * height]; //easier to keep it 1D and transform to 2D as needed
+            Pixel *tmp_array = new Pixel[width * height]; // easier to keep it 1D and transform to 2D as needed
 
             for (int i = 0; i < (width * height); i++)
             {
-                //tmp_array[i].set(color.red(), color.green(), color.blue(), color.alpha());
                 tmp_array[i] = color;
             }
 
@@ -111,11 +109,11 @@ namespace gfx
 
         Bitmap(uint32_t width, uint32_t height)
         {
-            Pixel *tmp_array = new Pixel[width * height]; //easier to keep it 1D and transform to 2D as needed
+            Pixel *tmp_array = new Pixel[width * height]; // easier to keep it 1D and transform to 2D as needed
 
             for (int i = 0; i < (width * height); i++)
             {
-                //tmp_array[i].set(0, 0, 0, 0);
+                // tmp_array[i].set(0, 0, 0, 0);
                 tmp_array[i] = Pixel(0, 0, 0, 0);
             }
 
@@ -157,22 +155,20 @@ namespace gfx
             m_data[(m_width * y) + x] = tmp;
         }
 
-        void width(unsigned int &width)
+        unsigned int width()
         {
-            width = m_width;
+            return m_width;
         }
 
-        void height(unsigned int &height)
+        unsigned int height()
         {
-            height = m_height;
+            return m_height;
         }
 
         void stamp_with(gfx::Bitmap &src, shapes::Point location)
         {
-            unsigned int src_h;
-            unsigned int src_w;
-            src.height(src_h);
-            src.width(src_w);
+            unsigned int src_h = src.height();
+            unsigned int src_w = src.width();
 
             gfx::Pixel tmp;
             for (int dx = 0; dx < src_w; dx++)
@@ -186,11 +182,11 @@ namespace gfx
                 }
             }
         }
-        Pixel *m_data; //TODO: THIS SHOULD BE PRIVATE, but no better way to get it into SDL_interface for now
+        Pixel *m_data; // TODO: THIS SHOULD BE PRIVATE, but no better way to get it into SDL_interface for now
     private:
         int m_width;
         int m_height;
     };
 
 }
-#endif //GFX_TYPES_HPP
+#endif // GFX_TYPES_HPP

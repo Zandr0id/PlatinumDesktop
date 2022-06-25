@@ -2,6 +2,7 @@
 #define GFX_LIB_HPP_
 #include "libgfx_types.hpp"
 #include "libshapes_types.hpp"
+#include "bmp_FileTypes.hpp"
 
 namespace gfx
 {
@@ -22,6 +23,7 @@ namespace gfx
     void fill_rect(Bitmap &bitmap, int x, int y, unsigned int h, unsigned int w);
     void fill_rect(Bitmap &bitmap, shapes::Point origin, unsigned int h, unsigned int w);
 
+    int load_bitmap(gfx::Bitmap *dest, std::string file);
 }
 
-#endif //GFX_LIB_HPP_
+#endif // GFX_LIB_HPP_
