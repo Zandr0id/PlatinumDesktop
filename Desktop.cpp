@@ -112,7 +112,7 @@ void Desktop::MainLoop()
                 m_mouse_state.location.x = e.data.mouse_move_event.x;
                 m_mouse_state.location.y = e.data.mouse_move_event.y;
 
-                if (m_mouse_state.left_mouse_down && (m_focused_window->IsMouseOver(m_mouse_state.location)))
+                if (m_mouse_state.left_mouse_down && (m_focused_window->IsMouseOverTopBar(m_mouse_state.location)))
                 {
                     m_focused_window->SetLocation(m_mouse_state.location - m_mouse_offset_to_focused_window);
                 }
@@ -159,7 +159,8 @@ void Desktop::CompositScreen()
     {
         if (false == w->IsHidden())
         {
-            m_screen_space.stamp_with(*(w->Slate()), w->Location());
+            m_screen_space.stamp_with(*(w->Slate()), shapes::Point(w->Location().x, w->Location().y + gui::TOPBAR_HEIGHT));
+            m_screen_space.stamp_with(*(w->TopBar()), w->Location());
         }
     }
 
