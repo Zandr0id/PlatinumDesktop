@@ -3,9 +3,9 @@
 #include <math.h>
 #include <iostream>
 
-//Complex line calculator for different types of lines
-//returns a line object with a vector containing all points on the line
-//always goes from left to right
+// Complex line calculator for different types of lines
+// returns a line object with a vector containing all points on the line
+// always goes from left to right
 shapes::Line shapes::calculate_line(unsigned int x0, unsigned int y0, unsigned int x1, unsigned int y1)
 {
     Line ret;
@@ -20,10 +20,10 @@ shapes::Line shapes::calculate_line(unsigned int x0, unsigned int y0, unsigned i
     int abs_dx = abs(dx);
     int abs_dy = abs(dy);
 
-    //these cases are optomized for vert/horz lines
+    // these cases are optomized for vert/horz lines
     if (dx == 0)
     {
-        if (y0 > y1) //force draw from left to right
+        if (y0 > y1) // force draw from left to right
         {
             int tmp = y0;
             y0 = y1;
@@ -33,12 +33,12 @@ shapes::Line shapes::calculate_line(unsigned int x0, unsigned int y0, unsigned i
         {
             Point tmp(x0, y);
             ret.points.push_back(tmp);
-            //bitmap.set_pixel(gfx::draw_color, x0, y);
+            // bitmap.set_pixel(gfx::draw_color, x0, y);
         }
     }
     else if (dy == 0)
     {
-        if (x0 > x1) //force draw from left to right
+        if (x0 > x1) // force draw from left to right
         {
             int tmp = x0;
             x0 = x1;
@@ -48,13 +48,13 @@ shapes::Line shapes::calculate_line(unsigned int x0, unsigned int y0, unsigned i
         {
             Point tmp(x, y0);
             ret.points.push_back(tmp);
-            //bitmap.set_pixel(gfx::draw_color, x, y0);
+            // bitmap.set_pixel(gfx::draw_color, x, y0);
         }
     }
-    //this case for slope of 1
+    // this case for slope of 1
     else if (abs_dx == abs_dy)
     {
-        if ((x0 > x1)) //force draw from left to right
+        if ((x0 > x1)) // force draw from left to right
         {
             int tmp = y0;
             y0 = y1;
@@ -68,14 +68,14 @@ shapes::Line shapes::calculate_line(unsigned int x0, unsigned int y0, unsigned i
         {
             Point tmp(x, y0);
             ret.points.push_back(tmp);
-            //bitmap.set_pixel(gfx::draw_color, x, y0);
-            y0 += (abs_dy / dy); //becomes 1 or -1
+            // bitmap.set_pixel(gfx::draw_color, x, y0);
+            y0 += (abs_dy / dy); // becomes 1 or -1
         }
     }
-    //This case is for shallow slope
+    // This case is for shallow slope
     else if (abs_dx > abs_dy)
     {
-        if (x0 > x1) //force draw from left to right
+        if (x0 > x1) // force draw from left to right
         {
             int tmp = y0;
             y0 = y1;
@@ -110,10 +110,10 @@ shapes::Line shapes::calculate_line(unsigned int x0, unsigned int y0, unsigned i
             }
         }
     }
-    //This case is for steep slope
+    // This case is for steep slope
     else
     {
-        if (y0 > y1) //force draw from left to right
+        if (y0 > y1) // force draw from left to right
         {
             int tmp = y0;
             y0 = y1;
@@ -150,9 +150,9 @@ shapes::Line shapes::calculate_line(unsigned int x0, unsigned int y0, unsigned i
     return ret;
 }
 
-//Bresenham's Circle algorithm
-//Returns a vector of points on the edge of the requested circle
-//0 degrees is at the top, and they go around counter-clockwise
+// Bresenham's Circle algorithm
+// Returns a vector of points on the edge of the requested circle
+// 0 degrees is at the top, and they go around counter-clockwise
 shapes::Circle shapes::calculate_circle(unsigned int x0, unsigned int y0, unsigned int r)
 {
     Circle ret;
@@ -224,14 +224,14 @@ shapes::Circle shapes::calculate_circle(unsigned int x0, unsigned int y0, unsign
         tmp.set(x0 - y, y0 - x);
         q8.push_back(tmp);
     }
-    //these quadrants were calcualted in reverse, so flip them
+    // these quadrants were calcualted in reverse, so flip them
     std::reverse(q2.begin(), q2.end());
     std::reverse(q3.begin(), q3.end());
     std::reverse(q5.begin(), q5.end());
     std::reverse(q8.begin(), q8.end());
 
-    //the quadrants were calculated out of order, so concatenate them together in
-    //a continuous counter-clockwise direction
+    // the quadrants were calculated out of order, so concatenate them together in
+    // a continuous counter-clockwise direction
     ret.parimeter.insert(ret.parimeter.end(), q4.begin(), q4.end());
     ret.parimeter.insert(ret.parimeter.end(), q8.begin(), q8.end());
     ret.parimeter.insert(ret.parimeter.end(), q6.begin(), q6.end());
@@ -250,15 +250,15 @@ shapes::Rect shapes::calculate_rect(unsigned int x, unsigned int y, unsigned int
     w--;
     h--;
 
-    //set the corners in a ccw fasion, starting with top left
+    // set the corners in a ccw fasion, starting with top left
     ret.corners.a.set(x, y);
     ret.corners.b.set(x, y + h);
     ret.corners.c.set(x + w, y + h);
     ret.corners.d.set(x + w, y);
 
-    tmp = calculate_line(x, y, x, y + h);                                            //calculate the line
-    ret.sides.a = tmp;                                                               //save it as a side
-    ret.parimeter.insert(ret.parimeter.end(), tmp.points.begin(), tmp.points.end()); //add it to the parimeter points
+    tmp = calculate_line(x, y, x, y + h);                                            // calculate the line
+    ret.sides.a = tmp;                                                               // save it as a side
+    ret.parimeter.insert(ret.parimeter.end(), tmp.points.begin(), tmp.points.end()); // add it to the parimeter points
     tmp = calculate_line(x, y + h, x + w, y + h);
     ret.sides.b = tmp;
     ret.parimeter.insert(ret.parimeter.end(), tmp.points.begin(), tmp.points.end());
@@ -272,7 +272,7 @@ shapes::Rect shapes::calculate_rect(unsigned int x, unsigned int y, unsigned int
     return ret;
 }
 
-//TODO: finish
+// TODO: finish
 shapes::Arc shapes::calculate_arc(unsigned int x, unsigned int y, unsigned int r, unsigned short theta_1, unsigned short theta_2)
 {
     Arc ret;
@@ -283,18 +283,18 @@ shapes::Arc shapes::calculate_arc(unsigned int x, unsigned int y, unsigned int r
     ret.theta_2 = theta_2;
 
     Circle base = calculate_circle(x, y, r);
-    //std::cout << x << " " << y << " " << r << std::endl;
+    // std::cout << x << " " << y << " " << r << std::endl;
 
-    //standard trig functions assume 0 deg is down, but we want up, so...
+    // standard trig functions assume 0 deg is down, but we want up, so...
     theta_1 += 180;
     theta_2 += 180;
 
-    r += 5; //make sure the line crosses the circle
+    r += 5; // make sure the line crosses the circle
 
-    double angle = (theta_1) * (PI / 180.0); //convert to rad
-    int opp = sin(angle) * r;                //find the two end points and normalize
+    double angle = (theta_1) * (PI / 180.0); // convert to rad
+    int opp = sin(angle) * r;                // find the two end points and normalize
     int adj = cos((angle)) * r;
-    Line start_angle = calculate_line(x, y, opp + x, adj + y); //find the line
+    Line start_angle = calculate_line(x, y, opp + x, adj + y); // find the line
     Point start(x + opp, y + adj);
 
     int start_index = 0;
@@ -302,7 +302,7 @@ shapes::Arc shapes::calculate_arc(unsigned int x, unsigned int y, unsigned int r
     {
         for (int j = 0; j < start_angle.points.size(); j++)
         {
-            //std::cout << "< " << base.parimeter[i].x << "," << base.parimeter[i].y << ">  ---  < " << start_angle.points[j].x << "," << start_angle.points[j].y << ">\n";
+            // std::cout << "< " << base.parimeter[i].x << "," << base.parimeter[i].y << ">  ---  < " << start_angle.points[j].x << "," << start_angle.points[j].y << ">\n";
             if (base.parimeter[i] == start_angle.points[j])
             {
                 start_index = i;
@@ -310,7 +310,7 @@ shapes::Arc shapes::calculate_arc(unsigned int x, unsigned int y, unsigned int r
             }
         }
     }
-    //std::cout << start_index << std::endl;
+    // std::cout << start_index << std::endl;
 
     angle = (theta_2) * (PI / 180.0);
     opp = sin(angle) * r;
@@ -368,7 +368,7 @@ shapes::Ellipse shapes::calculate_ellipse(unsigned int x, unsigned int y, unsign
 
     while (stop_x >= stop_y)
     {
-        //push back 4 quads
+        // push back 4 quads
         Point tmp(x + x0, y + y0);
         q1.push_back(tmp);
         tmp.set(x - x0, y + y0);
@@ -400,7 +400,7 @@ shapes::Ellipse shapes::calculate_ellipse(unsigned int x, unsigned int y, unsign
     stop_y = twoAsquare * r_h;
     while (stop_x <= stop_y)
     {
-        //push back 4 quads
+        // push back 4 quads
         Point tmp(x + x0, y + y0);
         q2.push_back(tmp);
         tmp.set(x - x0, y + y0);
@@ -422,20 +422,20 @@ shapes::Ellipse shapes::calculate_ellipse(unsigned int x, unsigned int y, unsign
             dy += twoAsquare;
         }
     }
-    //these were calculated cw, so flip to ccw
+    // these were calculated cw, so flip to ccw
     std::reverse(q1.begin(), q1.end());
     std::reverse(q4.begin(), q4.end());
     std::reverse(q5.begin(), q5.end());
     std::reverse(q8.begin(), q8.end());
 
-    ret.parimeter.insert(ret.parimeter.end(), q6.begin(), q6.end()); //up up left
-    ret.parimeter.insert(ret.parimeter.end(), q5.begin(), q5.end()); //mid up left
-    ret.parimeter.insert(ret.parimeter.end(), q3.begin(), q3.end()); //mid low left
-    ret.parimeter.insert(ret.parimeter.end(), q4.begin(), q4.end()); //low low left
-    ret.parimeter.insert(ret.parimeter.end(), q2.begin(), q2.end()); //low low right
-    ret.parimeter.insert(ret.parimeter.end(), q1.begin(), q1.end()); //mid low right
+    ret.parimeter.insert(ret.parimeter.end(), q6.begin(), q6.end()); // up up left
+    ret.parimeter.insert(ret.parimeter.end(), q5.begin(), q5.end()); // mid up left
+    ret.parimeter.insert(ret.parimeter.end(), q3.begin(), q3.end()); // mid low left
+    ret.parimeter.insert(ret.parimeter.end(), q4.begin(), q4.end()); // low low left
+    ret.parimeter.insert(ret.parimeter.end(), q2.begin(), q2.end()); // low low right
+    ret.parimeter.insert(ret.parimeter.end(), q1.begin(), q1.end()); // mid low right
     ret.parimeter.insert(ret.parimeter.end(), q7.begin(), q7.end()); // mid up right
-    ret.parimeter.insert(ret.parimeter.end(), q8.begin(), q8.end()); //up up right
+    ret.parimeter.insert(ret.parimeter.end(), q8.begin(), q8.end()); // up up right
 
     return ret;
 }

@@ -92,7 +92,7 @@ void gfx::draw_rect(Bitmap &bitmap, const shapes::Point origin, const unsigned i
 
 void gfx::fill_rect(Bitmap &bitmap, const int x, const int y, const unsigned int h, const unsigned int w)
 {
-    shapes::Rect rect = shapes::calculate_rect(x, y, w, h);
+    shapes::Rect rect = shapes::calculate_rect(x, y, w + 1, h + 1);
     for (int i = 0; i < rect.sides.a.points.size(); i++)
     {
         draw_line(bitmap, rect.sides.a.points[i], rect.sides.c.points[i]);

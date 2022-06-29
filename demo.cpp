@@ -2,8 +2,8 @@
 #include "Desktop.hpp"
 #include "ErrorOr.hpp"
 
-constexpr int SCREEN_WIDTH = 1000;
-constexpr int SCREEN_HEIGHT = 1000;
+constexpr int SCREEN_WIDTH = 800;
+constexpr int SCREEN_HEIGHT = 800;
 
 ErrorOr<int> RunDesktop()
 {
