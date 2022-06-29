@@ -9,4 +9,6 @@ programs can use to create interface.
 
 Currently using SDL2 as a pass-through adapter to draw to the the screen and get input events.
 Eventually SDL2 should be lifted out and connections should be made to actual hardware drivers.
-So make sure SDL2 is installed on your system.
+So make sure SDL2 is installed on your system. Check out https://lazyfoo.net/tutorials/SDL/01_hello_SDL/linux/index.php for help.
+
+Just run `make` and then `make run` to dest drive!
