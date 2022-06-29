@@ -1,22 +1,22 @@
 #include "WidgetCanvas.hpp"
+#include <stdlib.h>
 
-gui::WidgetCanvas::WidgetCanvas(unsigned int w, unsigned int h)
+gui::WidgetCanvas::WidgetCanvas(unsigned int w, unsigned int h, shapes::Point location)
 {
     m_width = w;
     m_height = h;
-    m_bounds = shapes::calculate_rect(0, 0, w, h);
+    SetRelativeLocation(location);
 
     // m_bitmap = new gfx::Bitmap(w, h, gfx::Pixel(20, 20, 20, 255));
     m_bitmap = new gfx::Bitmap(w, h);
-
     // gfx::draw_color = gfx::Pixel(0, 255, 255, 255);
     // gfx::draw_rect(*m_bitmap, shapes::Point(0, 0), h, w);
     gfx::draw_color = gfx::Pixel(20, 20, 20, 255);
     gfx::fill_rect(*m_bitmap, 0, 0, h, w);
-    m_bitmap->set_pixel(gfx::Pixel(0, 255, 255, 255), 0, 0);
-    m_bitmap->set_pixel(gfx::Pixel(0, 255, 255, 255), 0, 49);
-    m_bitmap->set_pixel(gfx::Pixel(0, 255, 255, 255), 99, 0);
-    m_bitmap->set_pixel(gfx::Pixel(0, 255, 255, 255), 99, 49);
+    // m_bitmap->set_pixel(gfx::Pixel(0, 255, 255, 255), 0, 0);
+    // m_bitmap->set_pixel(gfx::Pixel(0, 255, 255, 255), 0, 49);
+    // m_bitmap->set_pixel(gfx::Pixel(0, 255, 255, 255), 99, 0);
+    // m_bitmap->set_pixel(gfx::Pixel(0, 255, 255, 255), 99, 49);
 }
 
 gui::WidgetCanvas::~WidgetCanvas()
@@ -32,7 +32,6 @@ void gui::WidgetCanvas::Hovered(shapes::Point mouse)
         // pass the hovered event down
         if (w->Bounds().does_contain_point(relative_mouse, w->RelativeLocation()))
         {
-
             w->Hovered(relative_mouse);
         }
     }

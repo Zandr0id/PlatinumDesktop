@@ -13,7 +13,7 @@ namespace gui
     class WidgetCanvas : public Widget
     {
     public:
-        WidgetCanvas(unsigned int w, unsigned int h);
+        WidgetCanvas(unsigned int w, unsigned int h, shapes::Point location);
         ~WidgetCanvas();
 
         virtual void Hovered(shapes::Point mouse);

@@ -1,4 +1,5 @@
 #include "Desktop.hpp"
+#include <stdlib.h>
 
 Desktop::Desktop(const unsigned int width, const unsigned int height) : m_screen_space(width, height),
                                                                         m_background(width, height, gfx::Pixel(0, 0, 0, 255)),
@@ -90,9 +91,9 @@ void Desktop::SDL_EventCheck()
 void Desktop::MainLoop()
 {
     std::cout << "Main Loop Start" << std::endl;
-    CreateWindow(400, 150, shapes::Point(255, 255), "Large");
-    // CreateWindow(400, 150, shapes::Point(200, 340), "Large");
-    CreateWindow(100, 50, shapes::Point(230, 230), "Small");
+    CreateWindow(400, 150, shapes::Point(100, 100), "Large");
+    CreateWindow(400, 150, shapes::Point(200, 340), "Large2");
+    // CreateWindow(100, 50, shapes::Point(230, 230), "Small");
 
     while (true == m_running)
     {
@@ -107,10 +108,12 @@ void Desktop::MainLoop()
             case MOUSE_MOVE:
                 m_mouse_state.location.x = e.data.mouse_move_event.x;
                 m_mouse_state.location.y = e.data.mouse_move_event.y;
-
-                if (m_mouse_state.left_mouse_down && (m_focused_window->IsMouseOver(m_mouse_state.location)))
+                if (m_focused_window->IsMouseOverTopBar(m_mouse_state.location))
                 {
-                    m_focused_window->SetLocation(m_mouse_state.location - m_mouse_offset_to_focused_window);
+                    if (m_mouse_state.left_mouse_down)
+                    {
+                        m_focused_window->SetLocation(m_mouse_state.location - m_mouse_offset_to_focused_window);
+                    }
                 }
                 break;
             case MOUSE_BUTTON:
@@ -124,7 +127,8 @@ void Desktop::MainLoop()
                         gui::Window *tmp = m_window_list[i];
                         if (tmp->IsMouseOver(m_mouse_state.location))
                         {
-                            // this one gets the click, so move it to the top of the list and give it focus
+                            // SDL_LogInfo(0, "canvas %i", rand() % 1000);
+                            //  this one gets the click, so move it to the top of the list and give it focus
                             m_focused_window = tmp;
                             m_window_list.insert(m_window_list.end(), tmp);
                             m_window_list.erase(m_window_list.begin() + i);
@@ -155,9 +159,8 @@ void Desktop::CompositScreen()
     {
         if (false == w->IsHidden())
         {
-            w->Canvas()->CopyOut(&m_screen_space, w->Canvas()->RelativeLocation());
-            // m_screen_space.stamp_with(*(w->Slate()), shapes::Point(w->Location().x, w->Location().y + gui::TOPBAR_HEIGHT));
-            // m_screen_space.stamp_with(*(w->TopBar()), w->Location());
+            w->Paint();
+            m_screen_space.stamp_with(*(w->Slate()), w->Location());
         }
     }
 

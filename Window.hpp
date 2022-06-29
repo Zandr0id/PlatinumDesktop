@@ -7,7 +7,8 @@
 
 namespace gui
 {
-    constexpr unsigned int TOPBAR_HEIGHT = 50; // pixels
+    constexpr unsigned int TOPBAR_HEIGHT = 40; // pixels
+    constexpr unsigned int EDGE_WIDTH = 1;     // pixel
 
     class Window
     {
@@ -20,8 +21,9 @@ namespace gui
 
         // mouse hover checks
         bool IsMouseOver(shapes::Point mouse);
-        // bool IsMouseOverSlate(shapes::Point mouse);
-        // bool IsMouseOverTopBar(shapes::Point mouse);
+        bool IsMouseOverCanvas(shapes::Point mouse);
+        bool IsMouseOverTopBar(shapes::Point mouse);
+        void Paint();
 
         void SetLocation(shapes::Point new_pos);
         // shapes::Rect TotalBounds() { return m_total_bounds; };
@@ -31,7 +33,7 @@ namespace gui
         shapes::Point Location();
 
         // gfx::Bitmap *TopBar();
-        // gfx::Bitmap *Slate();
+        gfx::Bitmap *Slate();
         gui::WidgetCanvas *Canvas() { return m_canvas; };
         std::string Name();
         unsigned int Width() { return m_width; };
@@ -42,20 +44,16 @@ namespace gui
         unsigned int m_width;
         unsigned int m_height;
         shapes::Point m_location;
-
-        gui::WidgetCanvas *m_canvas;
-
-        // shapes::Rect m_total_bounds;
-
         bool m_hidden;
 
-        // shapes::Rect m_slate_bounds;
-        // gfx::Bitmap m_slate; // the bitmap to draw the window on
+        gui::WidgetCanvas *m_topbar;
+        gui::WidgetCanvas *m_canvas;
 
-        // shapes::Rect m_topbar_bounds;
-        // gfx::Bitmap m_topbar; // The top bar for dragging and buttons
+        shapes::Rect m_slate_bounds;
+        gfx::Bitmap *m_slate; // the bitmap to draw the window on
 
         EventQueue m_event_queue;
+        bool m_dirty; //;this window needs to be repainted
     };
 
 }

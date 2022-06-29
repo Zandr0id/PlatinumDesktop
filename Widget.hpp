@@ -19,6 +19,7 @@ namespace gui
         void SetRelativeLocation(shapes::Point new_location)
         {
             m_relative_location = new_location;
+            m_bounds = shapes::calculate_rect(m_relative_location.x, m_relative_location.y, m_width, m_height);
         };
         void AddChild(Widget *child)
         {
