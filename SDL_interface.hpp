@@ -10,7 +10,7 @@ Date: 03/08/2021
 
 #include <SDL2/SDL.h>
 #include "libgfx.hpp"
-#include <GL/glew.h>
+//#include <GL/glew.h>
 #include <SDL2/SDL_opengl.h>
 #include <GL/gl.h>
 
